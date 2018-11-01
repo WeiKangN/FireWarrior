@@ -129,58 +129,10 @@ void MainPlayer::setvelocity(Vec2 vec)
 			_typeAnim = ANIM_DOWN;
 			_Maverick->stopActionByTag(1);
 			PlayAnimationDown();
-			
 		}
 		
 	}
 	
-}
-
-void MainPlayer::setvec(cocos2d::Vec2 Vector)
-{
-	m_velocity = Vector;
-	auto X = (m_velocity.x);
-	auto Y = (m_velocity.y);
-	if (Y < 0)
-	{
-		if (_typeHit != ANIM_HIT_DOWN)
-		{
-			_typeHit = ANIM_HIT_DOWN;
-			//_Maverick->stopActionByTag(1);
-			PlayAnimationHit();
-		}
-
-	}
-	else if (Y > 0)
-	{
-		if (_typeHit!=ANIM_HIT_UP)
-		{
-			_typeHit = ANIM_HIT_UP;
-			PlayAnimationHitUp();
-
-		}
-		 
-	}
-	else if (X > 0)
-	{
-		if (_typeHit != ANIM_HIT_RIGHT)
-		{
-			_typeHit = ANIM_HIT_RIGHT;
-			PlayAnimationHitRight();
-
-		}
-
-	}
-	else if (X < 0)
-	{
-		if (_typeHit != ANIM_HIT_LEFT)
-		{
-			_typeHit = ANIM_HIT_LEFT;
-			PlayAnimationHitLeft();
-
-		}
-
-	}
 }
 
 void MainPlayer::PlayAnimation()
@@ -277,7 +229,6 @@ void MainPlayer::PlayAnimationDown()
 
 void MainPlayer::PlayAnimationHit()
 {
-
 	Animation*animation = Animation::create();
 	for (int i = 1; i < 5; i++)
 	{

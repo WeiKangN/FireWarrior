@@ -35,9 +35,10 @@ bool GameScene::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Art/Knight.plist", "Art/Knight.png");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Art/Bandit/bandit.plist", "Art/Bandit/bandit.png");
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Art/Evil/Doggo.plist", "Art/Evil/Doggo.png");
+	
 	gamePlayLayer = GamePlayLayer::create();
-
 	this->addChild(gamePlayLayer);
+
 	controller = RoleController::createController(70, Vec2(0, 0));
 	controller->setRoleControllerListenr(this);
 	this->addChild(controller, 99);
@@ -49,7 +50,9 @@ bool GameScene::init()
 	auto winSize = Director::getInstance()->getWinSize();
 	_btnPlay = Button::create("Art/ButtonHit_1.png", "Art/ButtonHit_2.png", "Art/ButtonHit_1.png");
 	this->addChild(_btnPlay);
-	_btnPlay->setPosition(Vec2(winSize.height + 500, winSize.width / 2 - 570));
+	_btnPlay->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+	//_btnPlay->setPosition(Vec2(winSize.height + 500, winSize.width / 2 - 570)); // ???
+	_btnPlay->setPosition(Vec2(winSize.width - 200.0f, 200.0f));
 	//_btnPlay->setPosition(winSize * 0.5f);
 	_btnPlay->setScale(2.5f);
 	_btnPlay->addTouchEventListener(CC_CALLBACK_2(GameScene::PlayButtonHit, this));

@@ -3,7 +3,6 @@
 #include "GameScene.h"
 #include "Bandit.h"
 #include "EvilDog.h"
-#include "RoleController.h"
 
 
 USING_NS_CC;
@@ -28,7 +27,6 @@ bool GamePlayLayer::init()
 	right = true;
 
 	//MainPlayer
-	winSize = Director::getInstance()->getWinSize();
 	_Knight = MainPlayer::create();
 	this->addChild(_Knight,2);
 	_Knight->setPosition(200.0f, 600.0f);
@@ -48,20 +46,6 @@ bool GamePlayLayer::init()
 	_HellDog->setPosition(1000.0f, 500.0f);
 	_HellDog->DogIdle();
 	
-	//JoyStick
-	controller = RoleController::createController(70, Vec2(0, 0));
-	controller->setRoleControllerListenr(this);
-	//this->addChild(controller, 0);
-
-	// Click Button Hit
-
-	auto winSize = Director::getInstance()->getWinSize();
-	_buttonPlay = Button::create("Art/ButtonHit_1.png", "Art/ButtonHit_1.png", "Art/ButtonHit_1.png");
-	//this->addChild(_buttonPlay);
-	_buttonPlay->setPosition(Vec2(winSize.height+500,winSize.width/2-570));
-	_buttonPlay->setScale(1.5f);
-	_buttonPlay->addTouchEventListener(CC_CALLBACK_2(GamePlayLayer::PlayButtonHit, this));
-
 	//Key
 	EventListenerKeyboard* eventClick = EventListenerKeyboard::create() ;
 	eventClick->onKeyReleased = CC_CALLBACK_2(GamePlayLayer::onKeyReleased, this); 
@@ -70,16 +54,16 @@ bool GamePlayLayer::init()
 
 	//map
 
-	auto _tileMap = TMXTiledMap::create("Art/Underground/underground2.tmx");
-	_tileMap->setScale(6.5f);
-	_tileMap->setPosition(-700.0f,-2000.0f);
-	addChild(_tileMap, 0, 99);
+	auto tileMap = TMXTiledMap::create("Art/Underground/underground2.tmx");
+	tileMap->setScale(6.5f);
+	tileMap->setPosition(-700.0f,-2000.0f);
+	addChild(tileMap, 0, 99);
 
-	auto ObjectWall = _tileMap->getObjectGroup("wall");
-	auto Wall = ObjectWall->getObjects();
-	for (int i = 0; i < Wall.size(); i++)
+	auto groupWall = tileMap->getObjectGroup("wall");
+	auto wallList = groupWall->getObjects();
+	for (int i = 0; i < wallList.size(); i++)
 	{
-		auto objInfo = Wall.at(i).asValueMap();
+		auto objInfo = wallList.at(i).asValueMap();
 		int type = objInfo.at("type").asInt();
 		if (type==1)
 		{
@@ -110,70 +94,6 @@ void GamePlayLayer::update(float dt)
 	//_Cam->setPosition3D(campos);
 
 }
-
-void GamePlayLayer::onControllerTouchBegan(cocos2d::Vec2 velocity)
-{
-	
-}
-
-void GamePlayLayer::onControllerTouchMoving(cocos2d::Vec2 velocity)
-{
-
-	CCLOG(" GamePlayLayer moving %f %f", velocity.x, velocity.y);
-	Vec2 newVelocity = velocity;
-	auto absX = abs(newVelocity.x);
-	auto absY = abs(newVelocity.y);
-
-	if (absX > absY)
-	{
-
-		newVelocity.y = 0;
-	}
-	else if (absY > absX)
-	{
-		newVelocity.x = 0;
-	}
-	else
-	{
-		newVelocity.x = 0;
-		newVelocity.y = 0;
-	}
-	_Knight->setvelocity(newVelocity);
-
-	_Cam = Camera::getDefaultCamera();
-	campos = _Cam->getPosition3D();
-	campos.x = _Knight->getPositionX();
-	campos.y = _Knight->getPositionY();
-	_Cam->setPosition3D(campos);
-
-	/*controller->setPositioin(Vec2(_Knight->getPositionX()-200, _Knight->getPositionY()-600));*/
-
-}
-
-void GamePlayLayer::onControllerTouchEnded(cocos2d::Vec2 velocity)
-{
-
-	CCLOG(" GamePlayLayer end %f %f", velocity.x, velocity.y);
-	_Knight->setvelocity(velocity);
-	unscheduleUpdate();
-}
-
-
-
-void GamePlayLayer::PlayButtonHit(cocos2d::Ref * ref, cocos2d::ui::Widget::TouchEventType type)
-{
-	if (type == Widget::TouchEventType::ENDED)
-	{
-		cocos2d::log("On end button hit");
-
-		
-
-	}
-}
-
-
-
-
 
 bool GamePlayLayer::onGameContactBegin(cocos2d::PhysicsContact & contact)
 
