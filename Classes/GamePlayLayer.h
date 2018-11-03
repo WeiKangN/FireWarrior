@@ -8,7 +8,7 @@
 class EvilDog;
 class MainPlayer;
 class Bandit;
-class GamePlayLayer:public cocos2d::Layer, public RoleControllerListenr
+class GamePlayLayer:public cocos2d::Layer
 
 {
 public:
@@ -19,17 +19,11 @@ public:
 	MainPlayer*_Knight;
 	Bandit*_bandit;
 	EvilDog*_HellDog;
-	cocos2d::Size winSize;
 	cocos2d::Camera* _Cam;
 	cocos2d::Vec3 campos;
 
 	void menuCloseCallback(cocos2d::Ref* pSender);
 	void update(float dt);
-	void onControllerTouchBegan(cocos2d::Vec2 velocity);
-	void onControllerTouchMoving(cocos2d::Vec2 velocity);
-	void onControllerTouchEnded(cocos2d::Vec2 velocity);
-	void PlayButtonHit(cocos2d::Ref* ref,cocos2d::ui::Widget::TouchEventType type);
-	cocos2d::ui::Button*	_buttonPlay;
 	
 protected:
 	/*void onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);
@@ -37,7 +31,6 @@ protected:
 
 private:
 	bool onGameContactBegin(cocos2d::PhysicsContact& contact);
-	RoleController*controller;
 	bool right;
 	bool left;
 	bool up;

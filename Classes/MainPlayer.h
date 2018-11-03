@@ -22,7 +22,6 @@ public:
 	virtual bool init();
 	void update(float dt);
 	void setvelocity(cocos2d::Vec2 vec);
-	void setvec(cocos2d::Vec2 Vector);
 	void PlayAnimation();
 	void PlayAnimationRight();
 	void PlayAnimationLeft();
