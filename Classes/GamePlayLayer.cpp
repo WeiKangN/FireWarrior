@@ -5,17 +5,20 @@
 #include "EvilDog.h"
 #include "RoleController.h"
 #include "Const.h"
-
+#include "Physics/PhysicsHandler.h"
+#include "Wall.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
 
 GamePlayLayer::GamePlayLayer()
 {
+	_physicsHandler = new PhysicsHandler();
 }
 
 GamePlayLayer::~GamePlayLayer()
 {
+	CC_SAFE_DELETE(_physicsHandler);
 }
 
 bool GamePlayLayer::init()
@@ -59,6 +62,13 @@ bool GamePlayLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(eventClick, this);
 	scheduleUpdate();
 
+	auto ePhysics = EventListenerPhysicsContact::create();
+	ePhysics->onContactBegin = CC_CALLBACK_1(PhysicsHandler::onContactBegin, _physicsHandler);
+	ePhysics->onContactPostSolve = CC_CALLBACK_2(PhysicsHandler::onContactPostSolve, _physicsHandler);
+	ePhysics->onContactPreSolve = CC_CALLBACK_2(PhysicsHandler::onContactPreSolve, _physicsHandler);
+	ePhysics->onContactSeparate = CC_CALLBACK_1(PhysicsHandler::onContactSeperated, _physicsHandler);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(ePhysics, this);
+
 	//map
 
 	auto _tileMap = TMXTiledMap::create("Art/Underground/underground2.tmx");
@@ -81,47 +91,31 @@ bool GamePlayLayer::init()
 			int width = objInfo.at("width").asInt();
 			int height = objInfo.at("height").asInt();
 
-			auto node = Node::create();
-			this->addChild(node);
-			node->setPosition(x, y);
+			auto wall = Wall::create();
+			this->addChild(wall);
+			wall->setPosition(x, y);
 
-			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(100.0f, 0.0f, 0.0f));
 			tilePhysics->setDynamic(false);   //static is good enough for walls
 			tilePhysics->setGravityEnable(false);
 			tilePhysics->setRotationEnable(false);
-			node->setPhysicsBody(tilePhysics);
+			tilePhysics->setCategoryBitmask(WALL_CATEGORY_BITMASK);
+			tilePhysics->setCollisionBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
+			tilePhysics->setContactTestBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
+			wall->setPhysicsBody(tilePhysics);
+
+			//auto node = Node::create();
+			//this->addChild(node);
+			//node->setPosition(x, y);
+
+			//PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+			//tilePhysics->setDynamic(false);   //static is good enough for walls
+			//tilePhysics->setGravityEnable(false);
+			//tilePhysics->setRotationEnable(false);
+			//node->setPhysicsBody(tilePhysics);
 		}
 		
 	}
 
-	
-
-	return true;
-}
-
-
-
-
-
-
-
-
-bool GamePlayLayer::onGameContactBegin(cocos2d::PhysicsContact & contact)
-
-{
-	PhysicsShape* playerA = contact.getShapeA();
-	PhysicsShape* playerB = contact.getShapeB();
-	Node* nodeA = playerA->getBody()->getOwner();
-	Node* nodeB = playerB->getBody()->getOwner();
-	Size winSize = Director::getInstance()->getWinSize();
-
-	MainPlayer* mainplayer = nullptr;
-	if (playerA->getCollisionBitmask() == 1 && playerB->getCollisionBitmask() == 2 || playerA->getCollisionBitmask() == 2 && playerB->getCollisionBitmask() == 1)
-	{
-		/*
-		auto gameOver = GameScene::createGameScene();
-		Director::getInstance()->replaceScene(gameOver);
-		*/
-	}
 	return true;
 }

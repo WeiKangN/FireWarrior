@@ -8,6 +8,7 @@
 class EvilDog;
 class MainPlayer;
 class Bandit;
+class PhysicsHandler;
 class GamePlayLayer:public cocos2d::Layer
 
 {
@@ -29,12 +30,13 @@ protected:
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);*/
 
 private:
-	bool onGameContactBegin(cocos2d::PhysicsContact& contact);
 	RoleController*controller;
 	bool right;
 	bool left;
 	bool up;
 	bool down;
+
+	PhysicsHandler* _physicsHandler;
 };
 
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -152,12 +152,15 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Bandit.cpp" />
     <ClCompile Include="..\Classes\EvilDog.cpp" />
+    <ClCompile Include="..\Classes\GameObject.cpp" />
     <ClCompile Include="..\Classes\GamePlayLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\MainPlayer.cpp" />
     <ClCompile Include="..\Classes\MenuScene.cpp" />
+    <ClCompile Include="..\Classes\Physics\PhysicsHandler.cpp" />
     <ClCompile Include="..\Classes\RoleController.cpp" />
+    <ClCompile Include="..\Classes\Wall.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,12 +168,15 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Bandit.h" />
     <ClInclude Include="..\Classes\Const.h" />
     <ClInclude Include="..\Classes\EvilDog.h" />
+    <ClInclude Include="..\Classes\GameObject.h" />
     <ClInclude Include="..\Classes\GamePlayLayer.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\MainPlayer.h" />
     <ClInclude Include="..\Classes\MenuScene.h" />
+    <ClInclude Include="..\Classes\Physics\PhysicsHandler.h" />
     <ClInclude Include="..\Classes\RoleController.h" />
+    <ClInclude Include="..\Classes\Wall.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

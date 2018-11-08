@@ -33,7 +33,7 @@ MainPlayer::~MainPlayer()
 
 bool MainPlayer::init()
 {
-	if (!Node::init())
+	if (!GameObject::init())
 	{
 		return false;
 	}
@@ -60,7 +60,7 @@ bool MainPlayer::init()
 	physBody->setCollisionBitmask(MAVERICK_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
 	physBody->setContactTestBitmask(MAVERICK_COLLISION_AND_CONTACT_TEST_BITMASK);
 	//apply physicsBody to the sprite
-	this->addComponent(physBody);
+	this->setPhysicsBody(physBody);
 	this->setTag(TAG_MAVERICK);
 
 	return true;
@@ -147,6 +147,10 @@ void MainPlayer::setvelocity(Vec2 vec)
 	else if (_direction == RIGHT)
 	{
 		this->_physicsBody->setVelocity(Vec2(ADJUST_VALUE_VELOCITY_X, 0));
+	}
+	else
+	{
+		this->_physicsBody->setVelocity(Vec2(0, 0));
 	}
 }
 
@@ -463,13 +467,29 @@ void MainPlayer::Attack()
 	}
 }
 
+void MainPlayer::onContactBeganWith(GameObject* obj)
+{
 
+}
+void MainPlayer::onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve)
+{
 
+}
 
+void MainPlayer::onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact)
+{
 
+}
 
+void MainPlayer::onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve)
+{
 
+}
 
-
-
-
+void MainPlayer::Stop()
+{
+	_typeAnim = ANIM_NONE;
+	_Maverick->stopActionByTag(1);
+	PlayAnimation();
+	_physicsBody->setVelocity(Vec2::ZERO);
+}

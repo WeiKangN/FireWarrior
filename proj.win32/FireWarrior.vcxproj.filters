@@ -10,6 +10,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Physics">
+      <UniqueIdentifier>{592a3dca-927b-4a16-b473-67a972c42d4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -40,6 +43,15 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MenuScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Physics\PhysicsHandler.cpp">
+      <Filter>src\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Wall.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,6 +87,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Const.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Physics\PhysicsHandler.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Wall.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

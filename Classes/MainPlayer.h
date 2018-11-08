@@ -4,8 +4,9 @@
 #include"RoleController.h"
 #include"cocos2d.h"
 #include "ui/CocosGUI.h"
+#include "GameObject.h"
 
-class MainPlayer:public cocos2d::Node
+class MainPlayer : public GameObject 
 {
 	enum  Direction
 	{
@@ -33,7 +34,12 @@ public:
 	void PlayAnimationHitLeft();
 	void PlayAnimationHitRight();
 	void Attack();
+	void Stop();
 
+	virtual void onContactBeganWith(GameObject* obj) override;
+	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
+	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
+	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
 private:
 	cocos2d::Sprite*_Maverick;
 	cocos2d::Sprite*_MaverickHitLeft;
@@ -42,8 +48,6 @@ private:
 	int _typeAnim;
 	int _typeHit;
 	Direction _direction;
-	
-
 };
 
 

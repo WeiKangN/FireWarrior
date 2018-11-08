@@ -15,9 +15,9 @@ GameScene::~GameScene()
 
 cocos2d::Scene * GameScene::createGameScene()
 {
-
 	Scene* scene = Scene::createWithPhysics();
 	PhysicsWorld* world = scene->getPhysicsWorld();
+	world->setSubsteps(10);
 	// remember to turn off debug when release
 	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	GameScene* node = GameScene::create();
@@ -109,7 +109,7 @@ void GameScene::onControllerTouchMoving(cocos2d::Vec2 velocity)
 void GameScene::onControllerTouchEnded(cocos2d::Vec2 velocity)
 {
 	CCLOG(" GamePlayLayer end %f %f", velocity.x, velocity.y);
-	gamePlayLayer->_Knight->setvelocity(velocity);
+	gamePlayLayer->_Knight->Stop();
 	//unscheduleUpdate();
 }
 
