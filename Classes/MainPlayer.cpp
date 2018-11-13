@@ -25,6 +25,8 @@ MainPlayer::MainPlayer()
 	m_velocity = Vec2::ZERO;
 	_typeAnim = 0;
 	_typeHit = 0;
+	Damage(DAMAGE_EVILDOG)
+		Health = 100.0f;
 }
 
 MainPlayer::~MainPlayer()
@@ -67,10 +69,11 @@ bool MainPlayer::init()
 }
 void MainPlayer::update(float dt)
 {
+	if (true)
+	{
 
-	//auto winSize = Director::getInstance()->getWinSize();
-	//Vect newPosition = this->getPosition() + Vec2(this->m_velocity.x, this->m_velocity.y) / 60.0f * CHARACTER_SPEED;
-	//this->setPosition(newPosition);
+	}
+	
 }
 void MainPlayer::setvelocity(Vec2 vec)
 {
@@ -469,7 +472,10 @@ void MainPlayer::Attack()
 
 void MainPlayer::onContactBeganWith(GameObject* obj)
 {
-
+	if (obj->getCollisionBitmask() == 2 )
+	{
+		this-> TakeDamage();
+	}
 }
 void MainPlayer::onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve)
 {
@@ -493,3 +499,12 @@ void MainPlayer::Stop()
 	PlayAnimation();
 	_physicsBody->setVelocity(Vec2::ZERO);
 }
+
+void MainPlayer::TakeDamage()
+{
+	this->Health -= this->TakeDamage;
+	CCLog("Mat Mau");
+
+}
+
+

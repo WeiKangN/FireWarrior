@@ -1,18 +1,25 @@
 #ifndef _EVIL_DOG_
 #define _EVIL_DOG_
 
+#include"GameObject.h"
 #include"cocos2d.h"
 #include"GamePlayLayer.h"
-class EvilDog : public cocos2d::Node
+#include"Physics\PhysicsHandler.h"
+class EvilDog : public GameObject
 
 {
 public:
 	EvilDog();
 	~EvilDog();
+	virtual void onContactBeganWith(GameObject* obj) override;
+	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
+	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
+	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
 	CREATE_FUNC(EvilDog);
 	virtual bool init();
 	void DogIdle();
 	void Run();
+	void Vanish();
 
 private:
 	cocos2d::Sprite*_sprDoggie;

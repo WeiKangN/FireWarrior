@@ -2,6 +2,7 @@
 #include "GamePlayLayer.h"
 #include "Const.h"
 
+
 USING_NS_CC;
 
 EvilDog::EvilDog()
@@ -9,6 +10,24 @@ EvilDog::EvilDog()
 }
 
 EvilDog::~EvilDog()
+{
+}
+
+void EvilDog::onContactBeganWith(GameObject * obj)
+{
+	
+
+}
+
+void EvilDog::onContactPostSolveWith(GameObject * obj, cocos2d::PhysicsContact & contact, const cocos2d::PhysicsContactPostSolve & solve)
+{
+}
+
+void EvilDog::onContactSeparateWith(GameObject * obj, cocos2d::PhysicsContact & contact)
+{
+}
+
+void EvilDog::onContactPreSolveWith(GameObject * obj, cocos2d::PhysicsContact & contact, cocos2d::PhysicsContactPreSolve & solve)
 {
 }
 
@@ -21,6 +40,7 @@ bool EvilDog::init()
 	Size WinSize = Director::getInstance()->getWinSize();
 	_sprDoggie = Sprite::create("Art/Evil/dog_idle  (1).png");
 	this->addChild(_sprDoggie);
+	this->setTag(TAG_DOG);
 	_sprDoggie->setPosition(this->getContentSize() * 0.5f);
 	this->setScale(4.0f);
 	

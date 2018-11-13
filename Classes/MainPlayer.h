@@ -35,7 +35,10 @@ public:
 	void PlayAnimationHitRight();
 	void Attack();
 	void Stop();
+	void TakeDamage();
 
+	float Health;
+	float Damage;
 	virtual void onContactBeganWith(GameObject* obj) override;
 	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
