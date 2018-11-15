@@ -25,8 +25,8 @@ MainPlayer::MainPlayer()
 	m_velocity = Vec2::ZERO;
 	_typeAnim = 0;
 	_typeHit = 0;
-	Damage(DAMAGE_EVILDOG)
-		Health = 100.0f;
+	
+		
 }
 
 MainPlayer::~MainPlayer()
@@ -43,6 +43,7 @@ bool MainPlayer::init()
 	//winSize = Director::getInstance()->getWinSize();
 	_Maverick = Sprite::create("Art/knight_idle (1).png");
 	this->addChild(_Maverick);
+	this->setTag(TAG_MAVERICK);
 	_Maverick->setPosition(this->getContentSize() * 0.5f);
 	this->setScale(2.2f);
 	scheduleUpdate();
@@ -63,7 +64,7 @@ bool MainPlayer::init()
 	physBody->setContactTestBitmask(MAVERICK_COLLISION_AND_CONTACT_TEST_BITMASK);
 	//apply physicsBody to the sprite
 	this->setPhysicsBody(physBody);
-	this->setTag(TAG_MAVERICK);
+	//this->setTag(TAG_MAVERICK);
 
 	return true;
 }
@@ -472,10 +473,11 @@ void MainPlayer::Attack()
 
 void MainPlayer::onContactBeganWith(GameObject* obj)
 {
-	if (obj->getCollisionBitmask() == 2 )
+	if (obj->getTag()==TAG_DOG)
 	{
-		this-> TakeDamage();
+		this->TakeDamage();
 	}
+	
 }
 void MainPlayer::onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve)
 {
@@ -500,10 +502,36 @@ void MainPlayer::Stop()
 	_physicsBody->setVelocity(Vec2::ZERO);
 }
 
+void MainPlayer::updateHealthBar(float percent)
+{
+	healthbarMaverick->removeFromParent();
+	setHealthBar(percent);
+}
+
+void MainPlayer::setHealthBar(float percent)
+{
+	auto winSize = Director::getInstance()->getWinSize();
+
+	healthbarMaverick = ui::LoadingBar::create("HealthBar.png");
+	this->addChild(healthbarMaverick);
+	healthbarMaverick->setDirection(ui::LoadingBar::Direction::LEFT);
+	healthbarMaverick->setScaleX(0.25f);
+	healthbarMaverick->setScaleY(1.2f);
+	healthbarMaverick->setPercent(percent);
+	healthbarMaverick->setPosition(Vec2(0.0f, 200.0f));
+}
+
 void MainPlayer::TakeDamage()
 {
-	this->Health -= this->TakeDamage;
-	CCLog("Mat Mau");
+	this->Health -= this->Damage;
+	this->updateHealthBar(this->Health);
+	if (this->Health <= 0)
+	{
+		auto deadPos = this->getPosition();
+		this->getPhysicsBody()->setContactTestBitmask(false);
+		
+		this->PlayAnimationHitLeft();
+	}
 
 }
 

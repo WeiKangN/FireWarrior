@@ -63,3 +63,19 @@ void Bandit::Attack()
 void Bandit::Run()
 {
 }
+
+void Bandit::onContactBeganWith(GameObject * obj)
+{
+}
+
+void Bandit::onContactPostSolveWith(GameObject * obj, cocos2d::PhysicsContact & contact, const cocos2d::PhysicsContactPostSolve & solve)
+{
+}
+
+void Bandit::onContactSeparateWith(GameObject * obj, cocos2d::PhysicsContact & contact)
+{
+}
+
+void Bandit::onContactPreSolveWith(GameObject * obj, cocos2d::PhysicsContact & contact, cocos2d::PhysicsContactPreSolve & solve)
+{
+}

@@ -1,6 +1,7 @@
 #ifndef _EVIL_DOG_
 #define _EVIL_DOG_
 
+#include "ui/CocosGUI.h"
 #include"GameObject.h"
 #include"cocos2d.h"
 #include"GamePlayLayer.h"
@@ -19,10 +20,14 @@ public:
 	virtual bool init();
 	void DogIdle();
 	void Run();
-	void Vanish();
-
+	void TakeDamage();
+	void updateHealthBar(float percent);
+	void setHealthBar(float percent);
+	ui::LoadingBar *healthbarEvilDog;
 private:
 	cocos2d::Sprite*_sprDoggie;
+	float Damage;
+	float Health;
 };
 
 
