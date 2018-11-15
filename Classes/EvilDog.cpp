@@ -123,5 +123,5 @@ void EvilDog::setHealthBar(float percent)
 	healthbarEvilDog->setScaleX(0.25f);
 	healthbarEvilDog->setScaleY(1.2f);
 	healthbarEvilDog->setPercent(percent);
-	healthbarEvilDog->setPosition(Vec2(0.0f, 200.0f));
+	healthbarEvilDog->setPosition(Vec2(200.0f, 200.0f));
 }

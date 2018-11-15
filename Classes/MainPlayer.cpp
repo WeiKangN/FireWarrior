@@ -518,7 +518,7 @@ void MainPlayer::setHealthBar(float percent)
 	healthbarMaverick->setScaleX(0.25f);
 	healthbarMaverick->setScaleY(1.2f);
 	healthbarMaverick->setPercent(percent);
-	healthbarMaverick->setPosition(Vec2(0.0f, 200.0f));
+	healthbarMaverick->setPosition(Vec2(200.0f, 200.0f));
 }
 
 void MainPlayer::TakeDamage()

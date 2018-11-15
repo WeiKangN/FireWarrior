@@ -23,7 +23,7 @@ public:
 	void TakeDamage();
 	void updateHealthBar(float percent);
 	void setHealthBar(float percent);
-	ui::LoadingBar *healthbarEvilDog;
+	cocos2d::ui::LoadingBar *healthbarEvilDog;
 private:
 	cocos2d::Sprite*_sprDoggie;
 	float Damage;

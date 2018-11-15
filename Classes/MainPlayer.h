@@ -45,7 +45,7 @@ public:
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
 	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
 private:
-	ui::LoadingBar *healthbarMaverick;
+	cocos2d::ui::LoadingBar *healthbarMaverick;
 	cocos2d::Sprite*_Maverick;
 	cocos2d::Sprite*_MaverickHitLeft;
 	cocos2d::Vec2 m_velocity;
