@@ -16,3 +16,7 @@ bool GameObject::init()
 	}
 	return true;
 }
+float GameObject::getDmg()
+{
+	return _dmg;
+}

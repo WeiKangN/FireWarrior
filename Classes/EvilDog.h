@@ -26,7 +26,6 @@ public:
 	cocos2d::ui::LoadingBar *healthbarEvilDog;
 private:
 	cocos2d::Sprite*_sprDoggie;
-	float Damage;
 	float Health;
 };
 

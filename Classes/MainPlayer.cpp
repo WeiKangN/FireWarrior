@@ -17,10 +17,14 @@ using namespace cocos2d::ui;
 #define ANIM_HIT_LEFT 7 
 #define ANIM_HIT_RIGHT 8
 
+#define DAMAGE_MAVERICK 50.0F
+#define HEALTH_MAVERICK 100.0F
+
 #define ADJUST_VALUE_VELOCITY_X 200.0f
 #define ADJUST_VALUE_VELOCITY_Y ADJUST_VALUE_VELOCITY_X
 
-MainPlayer::MainPlayer()
+MainPlayer::MainPlayer():
+	Damage(DAMAGE_MAVERICK),Health(HEALTH_MAVERICK)
 {
 	m_velocity = Vec2::ZERO;
 	_typeAnim = 0;
@@ -53,6 +57,10 @@ bool MainPlayer::init()
 	_btnPlay->setPosition(this->getContentSize() * 0.5f);
 	_btnPlay->addTouchEventListener(CC_CALLBACK_2(MainPlayer::PlayAnimationHit, this));
 	*/
+
+	//PhysicsLine
+
+
 
 	// Physic
 	PhysicsBody *physBody = PhysicsBody::createBox(Size(30.0f, 50.0f), PhysicsMaterial(0.1f, 0.0f, 0.0f));
@@ -371,7 +379,7 @@ void MainPlayer::PlayAnimationHitUp()
 	auto Next = Sequence::create(animateHitUp, animate, nullptr);
 	_Maverick->runAction(Next);
 }
-
+#pragma region Animation
 void MainPlayer::PlayAnimationHitLeft()
 {
 	Animation*animation = Animation::create();
@@ -384,7 +392,7 @@ void MainPlayer::PlayAnimationHitLeft()
 	}
 	animation->setDelayPerUnit(1 / 12.0f);
 
-	
+
 	Animate* animate = Animate::create(animation);
 	auto repeatForever = RepeatForever::create(animate);
 	repeatForever->setTag(1);
@@ -414,8 +422,8 @@ void MainPlayer::PlayAnimationHitLeft()
 void MainPlayer::PlayAnimationHitRight()
 {
 	Animation*animation = Animation::create();
-	if (int i =4 )
-		    
+	if (int i = 4)
+
 	{
 		std::string Knite = StringUtils::format("knight_run_right (%d).png", i);
 		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Knite));
@@ -450,6 +458,7 @@ void MainPlayer::PlayAnimationHitRight()
 	_Maverick->runAction(Next);
 
 }
+#pragma endregion
 
 void MainPlayer::Attack()
 {
@@ -475,6 +484,7 @@ void MainPlayer::onContactBeganWith(GameObject* obj)
 {
 	if (obj->getTag()==TAG_DOG)
 	{
+		_objDmg = obj->getDmg();
 		this->TakeDamage();
 	}
 	
@@ -512,25 +522,27 @@ void MainPlayer::setHealthBar(float percent)
 {
 	auto winSize = Director::getInstance()->getWinSize();
 
-	healthbarMaverick = ui::LoadingBar::create("HealthBar.png");
+	healthbarMaverick = ui::LoadingBar::create("Art/HealthBar.png");
 	this->addChild(healthbarMaverick);
 	healthbarMaverick->setDirection(ui::LoadingBar::Direction::LEFT);
 	healthbarMaverick->setScaleX(0.25f);
-	healthbarMaverick->setScaleY(1.2f);
+	healthbarMaverick->setScaleY(0.25f);
 	healthbarMaverick->setPercent(percent);
-	healthbarMaverick->setPosition(Vec2(200.0f, 200.0f));
+	healthbarMaverick->setPosition(Vec2(0.0f, 45.0f));
 }
 
 void MainPlayer::TakeDamage()
 {
-	this->Health -= this->Damage;
+	this->Health -= _objDmg;
 	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
 	{
-		auto deadPos = this->getPosition();
-		this->getPhysicsBody()->setContactTestBitmask(false);
 		
-		this->PlayAnimationHitLeft();
+		this->getPhysicsBody()->setContactTestBitmask(false);
+		CallFunc *removeCallback = CallFunc::create([=] {
+			this->removeFromParent();
+		});
+		runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));
 	}
 
 }

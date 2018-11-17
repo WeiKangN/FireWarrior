@@ -4,13 +4,13 @@
 #include "ui\UILoadingBar.h"
 
 #define DAMAGE_EVILDOG  50.0F
-
+#define HEALTH_DOG 50.0F
 USING_NS_CC;
 
 EvilDog::EvilDog():
-
-	Damage(DAMAGE_EVILDOG)
+	Health(HEALTH_DOG)
 {
+	_dmg = DAMAGE_EVILDOG;
 }
 
 EvilDog::~EvilDog()
@@ -49,12 +49,15 @@ bool EvilDog::init()
 	this->addChild(_sprDoggie);
 	this->setTag(TAG_DOG);
 	_sprDoggie->setPosition(this->getContentSize() * 0.5f);
+
 	this->setScale(4.0f);
 	
+
+
 	// Physic
 	PhysicsBody *physBody = PhysicsBody::createBox(Size(28.0f, 13.0f), PhysicsMaterial(1.0f, 1.0f, 0.0f));;
 	physBody->setGravityEnable(false);
-	physBody->setDynamic(true);
+	physBody->setDynamic(false);
 	physBody->setPositionOffset(Vec2(-5.0f,-10.0f));
 	physBody->setCategoryBitmask(ENEMY_CATEGORY_BITMASK); // 0001
 	physBody->setCollisionBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
@@ -94,11 +97,11 @@ void EvilDog::Run()
 
 void EvilDog::TakeDamage()
 {
-	this->Health -= this->Damage;
+	this->Health -= this->_dmg;
 	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
 	{
-		auto deadPos = this->getPosition();
+		
 		this->getPhysicsBody()->setContactTestBitmask(false);
 		CallFunc *removeCallback = CallFunc::create([=] {
 			this->removeFromParent();
@@ -111,17 +114,21 @@ void EvilDog::TakeDamage()
 
 void EvilDog::updateHealthBar(float percent)
 {
+	healthbarEvilDog->removeFromParent();
+	setHealthBar(percent);
 }
 
 void EvilDog::setHealthBar(float percent)
 {
 	auto winSize = Director::getInstance()->getWinSize();
 
-	healthbarEvilDog = ui::LoadingBar::create("HealthBar.png");
+	healthbarEvilDog = ui::LoadingBar::create("Art/HealthBar.png");
 	this->addChild(healthbarEvilDog);
 	healthbarEvilDog->setDirection(ui::LoadingBar::Direction::LEFT);
-	healthbarEvilDog->setScaleX(0.25f);
-	healthbarEvilDog->setScaleY(1.2f);
+	healthbarEvilDog->setScaleX(0.2f);
+	healthbarEvilDog->setScaleY(0.1f);
 	healthbarEvilDog->setPercent(percent);
-	healthbarEvilDog->setPosition(Vec2(200.0f, 200.0f));
+	healthbarEvilDog->setPosition(Vec2(15.0f, 10.0f));
+	
+	//healthbarEvilDog->setPosition(Vec2(winSize.width /2, winSize.height /2));
 }

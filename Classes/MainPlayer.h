@@ -55,6 +55,7 @@ private:
 	Direction _direction;
 	float Health;
 	float Damage;
+	float _objDmg;
 };
 
 

@@ -37,6 +37,7 @@ bool GamePlayLayer::init()
 	this->addChild(_Knight,2);
 	_Knight->setPosition(250.0f, 600.0f);
 	_Knight->PlayAnimation();
+	_Knight->setHealthBar(200.0f);
 	
 	//Enemy01
 	Size WinSize = Director::getInstance()->getWinSize();
@@ -46,11 +47,12 @@ bool GamePlayLayer::init()
 	_bandit->Idle();
 
 	//Enemy02
-	
+	//auto resetHealth = ;
 	_HellDog = EvilDog::create();
 	this->addChild(_HellDog,2);
 	_HellDog->setPosition(1000.0f, 500.0f);
 	_HellDog->DogIdle();
+	_HellDog->setHealthBar(50.0f);
 	
 
 
@@ -92,13 +94,14 @@ bool GamePlayLayer::init()
 			int height = objInfo.at("height").asInt();
 
 			auto wall = Wall::create();
-			this->addChild(wall);
+			_tileMap->addChild(wall);
 			wall->setPosition(x, y);
 
 			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(100.0f, 0.0f, 0.0f));
 			tilePhysics->setDynamic(false);   //static is good enough for walls
 			tilePhysics->setGravityEnable(false);
 			tilePhysics->setRotationEnable(false);
+			tilePhysics->setPositionOffset(Vec2(1500.0f, 60.0f));
 			tilePhysics->setCategoryBitmask(WALL_CATEGORY_BITMASK);
 			tilePhysics->setCollisionBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
 			tilePhysics->setContactTestBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
