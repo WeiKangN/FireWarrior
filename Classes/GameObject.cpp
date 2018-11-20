@@ -20,3 +20,5 @@ float GameObject::getDmg()
 {
 	return _dmg;
 }
+
+

@@ -14,8 +14,10 @@ public:
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) = 0;
 	virtual bool init() override;
 	virtual float getDmg();
+	
 protected:
 	float _dmg;
+
 };
 
 #endif // !GAME_OBJECT_H

@@ -16,13 +16,17 @@ public:
 	void Idle();
 	void Attack();
 	void Run();
+	void TakeDamage();
+	void updateHealthBar(float percent);
+	void setHealthBar(float percent);
+	cocos2d::ui::LoadingBar *healthbarBandit;
 	virtual void onContactBeganWith(GameObject* obj) override;
 	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
 	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
 private:
 	cocos2d::Sprite*_Enemy;
-
+	float Health;
 };
 
 

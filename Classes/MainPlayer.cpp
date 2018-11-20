@@ -49,7 +49,7 @@ bool MainPlayer::init()
 	this->addChild(_Maverick);
 	this->setTag(TAG_MAVERICK);
 	_Maverick->setPosition(this->getContentSize() * 0.5f);
-	this->setScale(2.2f);
+	this->setScale(2.3f);
 	scheduleUpdate();
 
 	/*_btnPlay = Button::create("Art/ButtonHit_1.png","Art/ButtonHit_1.png","Art/ButtonHit_1.png");
@@ -482,7 +482,7 @@ void MainPlayer::Attack()
 
 void MainPlayer::onContactBeganWith(GameObject* obj)
 {
-	if (obj->getTag()==TAG_DOG)
+	if (obj->getTag()==TAG_DOG||obj->getTag()==TAG_BANDIT)
 	{
 		_objDmg = obj->getDmg();
 		this->TakeDamage();

@@ -37,7 +37,7 @@ bool GamePlayLayer::init()
 	this->addChild(_Knight,2);
 	_Knight->setPosition(250.0f, 600.0f);
 	_Knight->PlayAnimation();
-	_Knight->setHealthBar(200.0f);
+	_Knight->setHealthBar(100.0f);
 	
 	//Enemy01
 	Size WinSize = Director::getInstance()->getWinSize();
@@ -45,6 +45,8 @@ bool GamePlayLayer::init()
 	this->addChild(_bandit,2);
 	_bandit->setPosition(1200.0f, 620.0f);
 	_bandit->Idle();
+	_bandit->Attack();
+	_bandit->setHealthBar(50.0f);
 
 	//Enemy02
 	//auto resetHealth = ;
@@ -52,6 +54,7 @@ bool GamePlayLayer::init()
 	this->addChild(_HellDog,2);
 	_HellDog->setPosition(1000.0f, 500.0f);
 	_HellDog->DogIdle();
+	_HellDog->Run();
 	_HellDog->setHealthBar(50.0f);
 	
 

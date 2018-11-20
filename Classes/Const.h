@@ -19,6 +19,6 @@
 
 
 #define TAG_DOG 3
-#define TAG_ENEMY 4
+#define TAG_BANDIT 4
 #define TAG_BOSS 5
 #endif // !_CONST_H_

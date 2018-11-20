@@ -92,6 +92,17 @@ void EvilDog::DogIdle()
 
 void EvilDog::Run()
 {
+	Animation* animation = Animation::create();
+	for (int i = 1; i < 6; i++)
+	{
+		std::string Demons = StringUtils::format("run_doggie (%d).png", i);
+		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
+
+	}
+	animation->setDelayPerUnit(1 / 12.0f);
+
+	Animate* animate = Animate::create(animation);
+	_sprDoggie->runAction(RepeatForever::create(animate));
 
 }
 
