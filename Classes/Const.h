@@ -18,6 +18,8 @@
 #define WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK 0xFFFF
 
 
+
+
 #define TAG_DOG 3
 #define TAG_BANDIT 4
 #define TAG_BOSS 5

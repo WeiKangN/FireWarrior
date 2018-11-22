@@ -72,8 +72,6 @@ bool MainPlayer::init()
 	physBody->setContactTestBitmask(MAVERICK_COLLISION_AND_CONTACT_TEST_BITMASK);
 	//apply physicsBody to the sprite
 	this->setPhysicsBody(physBody);
-	//this->setTag(TAG_MAVERICK);
-
 	return true;
 }
 void MainPlayer::update(float dt)
