@@ -27,6 +27,7 @@ public:
 private:
 	cocos2d::Sprite*_Enemy;
 	float Health;
+	float ObjDmg;
 };
 
 

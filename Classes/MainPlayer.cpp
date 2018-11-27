@@ -17,15 +17,17 @@ using namespace cocos2d::ui;
 #define ANIM_HIT_LEFT 7 
 #define ANIM_HIT_RIGHT 8
 
-#define DAMAGE_MAVERICK 50.0F
+#define DAMAGE_MAVERICK 25.0f
 #define HEALTH_MAVERICK 100.0F
 
 #define ADJUST_VALUE_VELOCITY_X 200.0f
 #define ADJUST_VALUE_VELOCITY_Y ADJUST_VALUE_VELOCITY_X
 
 MainPlayer::MainPlayer():
-	Damage(DAMAGE_MAVERICK),Health(HEALTH_MAVERICK)
+	Health(HEALTH_MAVERICK)
 {
+
+	_dmg = DAMAGE_MAVERICK;
 	m_velocity = Vec2::ZERO;
 	_typeAnim = 0;
 	_typeHit = 0;
@@ -43,7 +45,7 @@ bool MainPlayer::init()
 	{
 		return false;
 	}
-
+	_dmg = DAMAGE_MAVERICK;
 	//winSize = Director::getInstance()->getWinSize();
 	_Maverick = Sprite::create("Art/knight_idle (1).png");
 	this->addChild(_Maverick);
@@ -532,7 +534,6 @@ void MainPlayer::setHealthBar(float percent)
 void MainPlayer::TakeDamage()
 {
 	this->Health -= _objDmg;
-	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
 	{
 		
@@ -542,7 +543,10 @@ void MainPlayer::TakeDamage()
 		});
 		runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));
 	}
+	this->updateHealthBar(this->Health);
 
 }
+
+
 
 

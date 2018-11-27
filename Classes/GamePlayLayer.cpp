@@ -46,7 +46,7 @@ bool GamePlayLayer::init()
 	_bandit->setPosition(1200.0f, 620.0f);
 	_bandit->Idle();
 	_bandit->Attack();
-	_bandit->setHealthBar(50.0f);
+	_bandit->setHealthBar(100.0f);
 
 	//Enemy02
 	//auto resetHealth = ;
@@ -55,7 +55,7 @@ bool GamePlayLayer::init()
 	_HellDog->setPosition(1000.0f, 500.0f);
 	_HellDog->DogIdle();
 	_HellDog->Run();
-	_HellDog->setHealthBar(50.0f);
+	_HellDog->setHealthBar(100.0f);
 	
 
 

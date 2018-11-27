@@ -3,7 +3,7 @@
 #include "Const.h"
 #include "ui\UILoadingBar.h"
 
-#define DAMAGE_EVILDOG  50.0F
+#define DAMAGE_EVILDOG  25.0F
 #define HEALTH_DOG 50.0F
 USING_NS_CC;
 
@@ -21,6 +21,7 @@ void EvilDog::onContactBeganWith(GameObject * obj)
 {
 	if (obj->getTag()==TAG_MAVERICK)
 	{
+		
 		this->TakeDamage();
 	}
 
@@ -108,20 +109,23 @@ void EvilDog::Run()
 
 void EvilDog::TakeDamage()
 {
-	this->Health -= this->_dmg;
+	/*this->Health -= this->_dmg;
 	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
 	{
 		
-		this->getPhysicsBody()->setContactTestBitmask(false);
-		CallFunc *removeCallback = CallFunc::create([=] {
-			this->removeFromParent();
-		});
-		runAction(Sequence::create(Blink::create(3.0f, 3),removeCallback,nullptr));
+		
 
 		
-	}
+	}*/
+
+	this->getPhysicsBody()->setContactTestBitmask(false);
+	CallFunc *removeCallback = CallFunc::create([=] {
+		this->removeFromParent();
+	});
+	runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));
 }
+
 
 void EvilDog::updateHealthBar(float percent)
 {
@@ -140,6 +144,7 @@ void EvilDog::setHealthBar(float percent)
 	healthbarEvilDog->setScaleY(0.1f);
 	healthbarEvilDog->setPercent(percent);
 	healthbarEvilDog->setPosition(Vec2(15.0f, 10.0f));
+	healthbarEvilDog->setVisible(false);
 	
 	//healthbarEvilDog->setPosition(Vec2(winSize.width /2, winSize.height /2));
 }

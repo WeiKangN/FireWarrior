@@ -27,6 +27,7 @@ public:
 private:
 	cocos2d::Sprite*_sprDoggie;
 	float Health;
+
 };
 
 

@@ -13,7 +13,7 @@ public:
 	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) = 0;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) = 0;
 	virtual bool init() override;
-	virtual float getDmg();
+	float getDmg();
 	
 protected:
 	float _dmg;

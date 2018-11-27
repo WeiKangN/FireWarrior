@@ -54,6 +54,9 @@
     <ClCompile Include="..\Classes\Wall.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Hit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -96,6 +99,9 @@
       <Filter>src\Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Wall.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Hit.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

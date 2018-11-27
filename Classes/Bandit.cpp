@@ -3,7 +3,7 @@
 #include"Const.h"
 #include "Physics\PhysicsHandler.h"
 
-#define DAMAGE_BANDIT  50.0F
+#define DAMAGE_BANDIT  25.0F
 #define HEALTH_BANDIT 50.0F
 USING_NS_CC;
 Bandit::Bandit():
@@ -95,7 +95,7 @@ void Bandit::Run()
 void Bandit::TakeDamage()
 {
 
-	this->Health -= this->_dmg;
+	this->Health -= ObjDmg;
 	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
 	{
@@ -123,16 +123,19 @@ void Bandit::setHealthBar(float percent)
 	healthbarBandit = ui::LoadingBar::create("Art/HealthBar.png");
 	this->addChild(healthbarBandit);
 	healthbarBandit->setDirection(ui::LoadingBar::Direction::LEFT);
-	healthbarBandit->setScaleX(0.1f);
+	healthbarBandit->setScaleX(0.2f);
 	healthbarBandit->setScaleY(0.11f);
 	healthbarBandit->setPercent(percent);
-	healthbarBandit->setPosition(Vec2(7.0f, 10.0f));
+	healthbarBandit->setPosition(Vec2(15.0f, 10.0f));
+	healthbarBandit->setVisible(false);
 }
 
 void Bandit::onContactBeganWith(GameObject * obj)
 {
 	if (obj->getTag() == TAG_MAVERICK)
 	{
+		ObjDmg = obj->getDmg();
+
 		this->TakeDamage();
 	}
 }
