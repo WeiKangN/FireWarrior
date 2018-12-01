@@ -3,7 +3,7 @@
 #include "Const.h"
 #include "ui\UILoadingBar.h"
 
-#define DAMAGE_EVILDOG  25.0F
+#define DAMAGE_EVILDOG  28.0F
 #define HEALTH_DOG 50.0F
 USING_NS_CC;
 
@@ -63,8 +63,7 @@ bool EvilDog::init()
 	physBody->setCategoryBitmask(ENEMY_CATEGORY_BITMASK); // 0001
 	physBody->setCollisionBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
 	physBody->setContactTestBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK);
-	MoveBy* EnemyMove = MoveBy::create(4.0f, Vec2(-WinSize.width*0.8, 0));
-	this->runAction(RepeatForever::create(EnemyMove));
+	
 	//apply physicsBody to the sprite
 	this->addComponent(physBody);
 
@@ -72,6 +71,11 @@ bool EvilDog::init()
 
 }
 
+void EvilDog::chaseMaverick(cocos2d::Vec2 location)
+{
+	auto chase = MoveTo::create(15.0f, location);
+	runAction(chase);
+}
 void EvilDog::DogIdle()
 {
 	Animation* animation = Animation::create();
@@ -81,7 +85,7 @@ void EvilDog::DogIdle()
 		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
 
 	}
-	animation->setDelayPerUnit(1 / 12.0f);
+	animation->setDelayPerUnit(1 / 4.0f);
 
 	Animate* animate = Animate::create(animation);
 	_sprDoggie->runAction(RepeatForever::create(animate));
@@ -106,7 +110,10 @@ void EvilDog::Run()
 
 	Animate* animate = Animate::create(animation);
 	_sprDoggie->runAction(RepeatForever::create(animate));
+	//MoveTo* EnemyMove = MoveTo::create(60.0f, Vec2(location));
 
+	
+	//this->runAction(spawn);
 }
 
 void EvilDog::TakeDamage()

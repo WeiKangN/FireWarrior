@@ -21,6 +21,7 @@ public:
 	void DogIdle();
 	void Run();
 	void TakeDamage();
+	void chaseMaverick(cocos2d::Vec2 location);
 	void updateHealthBar(float percent);
 	void setHealthBar(float percent);
 	cocos2d::ui::LoadingBar *healthbarEvilDog;

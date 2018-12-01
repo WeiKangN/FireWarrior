@@ -24,6 +24,7 @@ public:
 	cocos2d::Camera* _Cam;
 	cocos2d::Vec3 campos;
 	cocos2d::ui::Button*	_buttonPlay;
+	void update(float delta);
 	
 protected:
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);

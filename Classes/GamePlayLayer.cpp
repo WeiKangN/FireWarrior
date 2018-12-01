@@ -54,11 +54,11 @@ bool GamePlayLayer::init()
 	this->addChild(_HellDog,2);
 	_HellDog->setPosition(1000.0f, 500.0f);
 	_HellDog->DogIdle();
-	_HellDog->Run();
 	_HellDog->setHealthBar(100.0f);
 	
-
-
+	
+	//khoang cach giua chó vs Maverick
+	
 
 
 	//Key
@@ -124,6 +124,22 @@ bool GamePlayLayer::init()
 	}
 
 	return true;
+}
+
+void GamePlayLayer::update(float delta)
+{
+	if (_HellDog!= nullptr)
+	{
+		auto distance = _HellDog->getPosition() - _Knight->getPosition();
+		Vec2 MinDis = Vec2(700.0f, 700.0f);
+		if (distance < MinDis)
+		{
+			_HellDog->Run();
+			_HellDog->chaseMaverick(_Knight->getPosition());
+		}
+	}
+	
+	
 }
 
 void GamePlayLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e)

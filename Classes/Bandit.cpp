@@ -3,7 +3,7 @@
 #include"Const.h"
 #include "Physics\PhysicsHandler.h"
 
-#define DAMAGE_BANDIT  25.0F
+#define DAMAGE_BANDIT  27.5F
 #define HEALTH_BANDIT 50.0F
 USING_NS_CC;
 Bandit::Bandit():
