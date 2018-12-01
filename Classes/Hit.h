@@ -20,8 +20,9 @@ public:
 	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
 	void setOnDestroyCallback(OnHitDestroyCallback callback);
 	void reset();
+	void attackAt(cocos2d::Vec2 pos);
+	void scheduleAutoDestroy();
 private :
-	void hit();
 	void update(float delta);
 
 private:

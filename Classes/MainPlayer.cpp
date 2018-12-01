@@ -26,6 +26,8 @@ using namespace cocos2d::ui;
 #define ADJUST_VALUE_VELOCITY_X 200.0f
 #define ADJUST_VALUE_VELOCITY_Y ADJUST_VALUE_VELOCITY_X
 
+#define OFFSET_ATTACK 75.0f
+
 MainPlayer::MainPlayer():
 	Health(HEALTH_MAVERICK),_poolHit(nullptr)
 {
@@ -464,41 +466,36 @@ void MainPlayer::PlayAnimationHitRight()
 }
 #pragma endregion
 
-void MainPlayer::Attack(float drtionX, float drtionY)
+void MainPlayer::Attack()
 {
-	auto hithit = _poolHit->createHit();
+	auto hit = _poolHit->createHit();
 	auto gameLayer = this->getParent();
 	/*auto posX = this->_physicsBody->getPosition().x + 20.0f;
 	auto posY = this->_physicsBody->getPosition().y;*/
-	auto posX = this->getPosition().x + drtionX;
-	auto posY = this->getPosition().y + drtionY;
-	hithit->setPosition(posX, posY);
-	gameLayer->addChild(hithit);
-}
-
-void MainPlayer::AttackDirection()
-{
+	auto posX = this->getPosition().x;
+	auto posY = this->getPosition().y;
 	if (_direction == RIGHT)
 	{
 		PlayAnimationHitRight();
-		Attack(0, 10.0f);
+		posX += OFFSET_ATTACK;
 	}
 	else if (_direction == LEFT)
 	{
 		PlayAnimationHitLeft();
-		Attack(0, -10.0f);
+		posX += -OFFSET_ATTACK;
 	}
 	else if (_direction == UP)
 	{
 		PlayAnimationHitUp();
-		Attack(10.0f,0);
+		posY += OFFSET_ATTACK;
 	}
 	else if (_direction == DOWN)
 	{
 		PlayAnimationHit();
-		Attack(-10.0f, 0);
+		posY += -OFFSET_ATTACK;
 	}
-	
+	hit->attackAt(Vec2(posX, posY));
+	gameLayer->addChild(hit);
 }
 
 void MainPlayer::onContactBeganWith(GameObject* obj)

@@ -94,7 +94,6 @@ void Bandit::Run()
 
 void Bandit::TakeDamage()
 {
-
 	this->Health -= ObjDmg;
 	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
@@ -105,8 +104,11 @@ void Bandit::TakeDamage()
 			this->removeFromParent();
 		});
 		runAction(Sequence::create(Blink::create(0.0f, 1), removeCallback, nullptr));
-
-
+	}
+	else
+	{
+		TintBy* tint = TintBy::create(0.5f, 255, 0.0f, 0.0f);
+		_Enemy->runAction(Sequence::create(tint, tint->reverse(), NULL));
 	}
 }
 
@@ -132,10 +134,9 @@ void Bandit::setHealthBar(float percent)
 
 void Bandit::onContactBeganWith(GameObject * obj)
 {
-	if (obj->getTag() == TAG_MAVERICK)
+	if (obj->getTag() == TAG_HIT)
 	{
 		ObjDmg = obj->getDmg();
-
 		this->TakeDamage();
 	}
 }

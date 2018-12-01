@@ -3,8 +3,11 @@
 
 USING_NS_CC;
 
+#define TIME_AUTO_DESTROY 0.1f
+
 Hit::Hit() : _willBeDestroy(false)
 {
+	_dmg = 10;
 }
 
 Hit::~Hit()
@@ -26,8 +29,7 @@ bool Hit::init()
 	phyBody->setContactTestBitmask(LINE_COLISION_AND_CONTACT_TEST_BITMASK);
 	//apply physicsBody to the sprite
 	this->setPhysicsBody(phyBody);
-	hit();
-	this->setTag((int)ObjectTAG::TAG_LINE);
+	this->setTag(TAG_HIT);
 	scheduleUpdate();
 
 	return true;
@@ -62,14 +64,7 @@ void Hit::setOnDestroyCallback(OnHitDestroyCallback callback)
 void Hit::reset()
 {
 	this->setVisible(true);
-	hit();
 	scheduleUpdate();
-}
-
-void Hit::hit()
-{
-	auto moveBy = MoveBy::create(0.5f, Vec2(500.0f, 0.0f));
-	this->runAction(moveBy);
 }
 
 void Hit::update(float delta)
@@ -85,4 +80,20 @@ void Hit::update(float delta)
 		this->removeFromParent();
 		_willBeDestroy = false;
 	}
+}
+
+void Hit::scheduleAutoDestroy()
+{
+	auto delay = DelayTime::create(TIME_AUTO_DESTROY);
+	auto seq = Sequence::create(delay, CallFunc::create([=]()
+	{
+		this->_willBeDestroy = true;
+	}), NULL);
+	this->runAction(seq);
+}
+
+void Hit::attackAt(cocos2d::Vec2 pos)
+{
+	this->setPosition(pos);
+	this->scheduleAutoDestroy();
 }

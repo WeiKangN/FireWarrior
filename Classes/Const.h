@@ -23,8 +23,6 @@
 #define TAG_DOG 3
 #define TAG_BANDIT 4
 #define TAG_BOSS 5
-enum class ObjectTAG
-{
-    TAG_LINE 
-};
+#define TAG_HIT 6
+
 #endif // !_CONST_H_

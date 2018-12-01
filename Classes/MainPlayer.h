@@ -35,8 +35,7 @@ public:
 	void PlayAnimationHitUp();
 	void PlayAnimationHitLeft();
 	void PlayAnimationHitRight();
-	void Attack(float drtionX, float drtionY);
-	void AttackDirection();
+	void Attack();
 	void Stop();
 	void updateHealthBar(float percent);
 	void setHealthBar(float percent);

@@ -125,3 +125,27 @@ bool GamePlayLayer::init()
 
 	return true;
 }
+
+void GamePlayLayer::onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e)
+{
+	if (keycode == EventKeyboard::KeyCode::KEY_S)
+	{
+		_Knight->setvelocity(Vec2(0.0f, -1.0f));
+	}
+	else if (keycode == EventKeyboard::KeyCode::KEY_C)
+	{
+		_Knight->Attack();
+	}
+}
+
+void GamePlayLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e)
+{
+	if (keycode == EventKeyboard::KeyCode::KEY_S)
+	{
+		_Knight->setvelocity(Vec2(0.0f, -1.0f));
+	}
+	else if (keycode == EventKeyboard::KeyCode::KEY_C)
+	{
+		_Knight->Attack();
+	}
+}

@@ -26,8 +26,8 @@ public:
 	cocos2d::ui::Button*	_buttonPlay;
 	
 protected:
-	/*void onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);
-	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);*/
+	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos2d::Event*e);
 
 private:
 	RoleController*controller;
