@@ -104,7 +104,7 @@ void Bandit::TakeDamage()
 		CallFunc *removeCallback = CallFunc::create([=] {
 			this->removeFromParent();
 		});
-		runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));
+		runAction(Sequence::create(Blink::create(0.0f, 1), removeCallback, nullptr));
 
 
 	}

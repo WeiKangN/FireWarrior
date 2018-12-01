@@ -63,6 +63,8 @@ bool EvilDog::init()
 	physBody->setCategoryBitmask(ENEMY_CATEGORY_BITMASK); // 0001
 	physBody->setCollisionBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
 	physBody->setContactTestBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK);
+	MoveBy* EnemyMove = MoveBy::create(4.0f, Vec2(-WinSize.width*0.8, 0));
+	this->runAction(RepeatForever::create(EnemyMove));
 	//apply physicsBody to the sprite
 	this->addComponent(physBody);
 
@@ -123,7 +125,7 @@ void EvilDog::TakeDamage()
 	CallFunc *removeCallback = CallFunc::create([=] {
 		this->removeFromParent();
 	});
-	runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));
+	runAction(Sequence::create(Blink::create(0.0f, 1), removeCallback, nullptr));
 }
 
 

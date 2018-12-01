@@ -156,12 +156,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\GamePlayLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Hit.cpp" />
     <ClCompile Include="..\Classes\MainPlayer.cpp" />
     <ClCompile Include="..\Classes\MenuScene.cpp" />
     <ClCompile Include="..\Classes\Physics\PhysicsHandler.cpp" />
+    <ClCompile Include="..\Classes\PoolHit.cpp" />
     <ClCompile Include="..\Classes\RoleController.cpp" />
     <ClCompile Include="..\Classes\Wall.cpp" />
-    <ClCompile Include="Hit.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,12 +174,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GamePlayLayer.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\Hit.h" />
     <ClInclude Include="..\Classes\MainPlayer.h" />
     <ClInclude Include="..\Classes\MenuScene.h" />
     <ClInclude Include="..\Classes\Physics\PhysicsHandler.h" />
+    <ClInclude Include="..\Classes\PoolHit.h" />
     <ClInclude Include="..\Classes\RoleController.h" />
     <ClInclude Include="..\Classes\Wall.h" />
-    <ClInclude Include="Hit.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

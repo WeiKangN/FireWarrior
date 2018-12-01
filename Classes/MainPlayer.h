@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "ui\UILoadingBar.h"
 
+class PoolHit;
 class MainPlayer : public GameObject 
 {
 public:
@@ -34,14 +35,12 @@ public:
 	void PlayAnimationHitUp();
 	void PlayAnimationHitLeft();
 	void PlayAnimationHitRight();
-	void Attack();
+	void Attack(float drtionX, float drtionY);
+	void AttackDirection();
 	void Stop();
 	void updateHealthBar(float percent);
 	void setHealthBar(float percent);
 	void TakeDamage();
-	
-
-
 	virtual void onContactBeganWith(GameObject* obj) override;
 	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
@@ -58,6 +57,7 @@ private:
 	float Health;
 	float Damage;
 	float _objDmg;
+	PoolHit* _poolHit;
 
 };
 

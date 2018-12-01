@@ -6,7 +6,7 @@
 #define MAVERICK_CATEGORY_BITMASK					0x01
 #define MAVERICK_COLLISION_AND_CONTACT_TEST_BITMASK 0x02
 
-#define TAG_LINE 6
+
 #define LINE_CATEGORY_BITMASK 0x01
 #define LINE_COLISION_AND_CONTACT_TEST_BITMASK 0x02
 
@@ -23,4 +23,8 @@
 #define TAG_DOG 3
 #define TAG_BANDIT 4
 #define TAG_BOSS 5
+enum class ObjectTAG
+{
+    TAG_LINE 
+};
 #endif // !_CONST_H_

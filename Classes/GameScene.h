@@ -6,6 +6,7 @@
 #include "ui/CocosGUI.h"
 class GamePlayLayer;
 class MainPlayer;
+class PoolHit;
 class GameScene :public cocos2d::Node, public RoleControllerListenr
 {
 public:
@@ -23,7 +24,7 @@ public:
 private:
 	GamePlayLayer* gamePlayLayer;
 	RoleController* controller;
-
+	/*PoolHit* _poolHit;*/
 };
 
 #endif // !_GAME_SCENCE_H

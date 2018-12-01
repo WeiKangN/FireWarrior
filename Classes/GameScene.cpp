@@ -2,15 +2,18 @@
 #include"GamePlayLayer.h"
 #include "RoleController.h"
 #include "MainPlayer.h"
+#include "PoolHit.h"
+#include "Hit.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
-GameScene::GameScene()
+GameScene::GameScene()/*:_poolHit(nullptr)*/
 {
-
+	/*_poolHit = new PoolHit();*/
 }
 
 GameScene::~GameScene()
 {
+	/*CC_SAFE_DELETE(_poolHit);*/
 }
 
 cocos2d::Scene * GameScene::createGameScene()
@@ -134,6 +137,6 @@ void GameScene::PlayButtonHit(cocos2d::Ref * ref, cocos2d::ui::Widget::TouchEven
 		cocos2d::log("On end button hit");
 
 		gamePlayLayer->_Knight->Attack();
-
+		
 	}
 }

@@ -54,7 +54,10 @@
     <ClCompile Include="..\Classes\Wall.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Hit.cpp">
+    <ClCompile Include="..\Classes\Hit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PoolHit.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,7 +104,10 @@
     <ClInclude Include="..\Classes\Wall.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Hit.h">
+    <ClInclude Include="..\Classes\Hit.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PoolHit.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

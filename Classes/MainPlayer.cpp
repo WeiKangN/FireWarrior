@@ -1,6 +1,9 @@
 #include "MainPlayer.h"
 #include"RoleController.h"
 #include"Const.h"
+#include "Hit.h"
+#include"PoolHit.h"
+
 
 
 USING_NS_CC;
@@ -24,9 +27,9 @@ using namespace cocos2d::ui;
 #define ADJUST_VALUE_VELOCITY_Y ADJUST_VALUE_VELOCITY_X
 
 MainPlayer::MainPlayer():
-	Health(HEALTH_MAVERICK)
+	Health(HEALTH_MAVERICK),_poolHit(nullptr)
 {
-
+	_poolHit = new PoolHit();
 	_dmg = DAMAGE_MAVERICK;
 	m_velocity = Vec2::ZERO;
 	_typeAnim = 0;
@@ -37,6 +40,7 @@ MainPlayer::MainPlayer():
 
 MainPlayer::~MainPlayer()
 {
+	CC_SAFE_DELETE(_poolHit);
 }
 
 bool MainPlayer::init()
@@ -460,24 +464,41 @@ void MainPlayer::PlayAnimationHitRight()
 }
 #pragma endregion
 
-void MainPlayer::Attack()
+void MainPlayer::Attack(float drtionX, float drtionY)
+{
+	auto hithit = _poolHit->createHit();
+	auto gameLayer = this->getParent();
+	/*auto posX = this->_physicsBody->getPosition().x + 20.0f;
+	auto posY = this->_physicsBody->getPosition().y;*/
+	auto posX = this->getPosition().x + drtionX;
+	auto posY = this->getPosition().y + drtionY;
+	hithit->setPosition(posX, posY);
+	gameLayer->addChild(hithit);
+}
+
+void MainPlayer::AttackDirection()
 {
 	if (_direction == RIGHT)
 	{
 		PlayAnimationHitRight();
+		Attack(0, 10.0f);
 	}
 	else if (_direction == LEFT)
 	{
 		PlayAnimationHitLeft();
+		Attack(0, -10.0f);
 	}
 	else if (_direction == UP)
 	{
 		PlayAnimationHitUp();
+		Attack(10.0f,0);
 	}
 	else if (_direction == DOWN)
 	{
 		PlayAnimationHit();
+		Attack(-10.0f, 0);
 	}
+	
 }
 
 void MainPlayer::onContactBeganWith(GameObject* obj)
@@ -522,11 +543,11 @@ void MainPlayer::setHealthBar(float percent)
 {
 	auto winSize = Director::getInstance()->getWinSize();
 
-	healthbarMaverick = ui::LoadingBar::create("Art/HealthBar.png");
+	healthbarMaverick = ui::LoadingBar::create("Art/heartbar_full2.png");
 	this->addChild(healthbarMaverick);
 	healthbarMaverick->setDirection(ui::LoadingBar::Direction::LEFT);
-	healthbarMaverick->setScaleX(0.25f);
-	healthbarMaverick->setScaleY(0.25f);
+	healthbarMaverick->setScaleX(1.2f);
+	healthbarMaverick->setScaleY(1.2f);
 	healthbarMaverick->setPercent(percent);
 	healthbarMaverick->setPosition(Vec2(0.0f, 45.0f));
 }
