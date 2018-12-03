@@ -5,13 +5,22 @@
 
 #define DAMAGE_EVILDOG  28.0F
 #define HEALTH_DOG 50.0F
+// toc do theo chieu x , y ma con enemy chay theo nhan vat
+#define SPEED_X 150.0f
+#define SPEED_Y SPEED_X
+// tag action ai
+#define TAG_ACTION_AI_CHASE_PLAYER 100
+
 USING_NS_CC;
 
 EvilDog::EvilDog():
+
 	Health(HEALTH_DOG)
-{
-	_dmg = DAMAGE_EVILDOG;
-}
+	{
+		_dmg = DAMAGE_EVILDOG;
+		_timeUpdateAI = 0.3f; // thoi gian ma con bot se cap nhap lai // cang nho con bot cang thong minh
+	}
+
 
 EvilDog::~EvilDog()
 {
@@ -37,6 +46,29 @@ void EvilDog::onContactSeparateWith(GameObject * obj, cocos2d::PhysicsContact & 
 
 void EvilDog::onContactPreSolveWith(GameObject * obj, cocos2d::PhysicsContact & contact, cocos2d::PhysicsContactPreSolve & solve)
 {
+}
+
+void EvilDog::enalbeAI(MainPlayer * player)
+{
+	_player = player;
+	this->schedule(CC_SCHEDULE_SELECTOR(EvilDog::scheduleUpdateAI), _timeUpdateAI, CC_REPEAT_FOREVER, 0.0f);
+}
+
+void EvilDog::scheduleUpdateAI(float delta)
+{
+	if (_player != nullptr)
+	{
+		auto distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
+		if (distanceX < _sprDoggie->getContentSize().width * 0.5f + 100.0f) // doan nay la : Khi con enemy chay den player cach mot khoang nao do la no se dung lai - dang xet theo chieu  x thui		
+		{
+			
+		}
+		else // neu no khong thoa khoang cach thi no di theo player
+		{
+		
+			chasePlayer();
+		}
+	}
 }
 
 bool EvilDog::init()
@@ -156,4 +188,17 @@ void EvilDog::setHealthBar(float percent)
 	healthbarEvilDog->setVisible(false);
 	
 	//healthbarEvilDog->setPosition(Vec2(winSize.width /2, winSize.height /2));
+}
+
+void EvilDog::chasePlayer() // Ham nay la ham con enemy chay theo nhan vat
+{
+	auto targetPos = _player->getPosition();
+	auto distance = targetPos - this->getPosition();
+	auto timeX = std::abs(distance.x / SPEED_X);
+	auto timeY = std::abs(distance.y / SPEED_Y);
+	auto time = timeX > timeY ? timeX : timeY;
+	auto aMove = MoveBy::create(time, distance);
+	aMove->setTag(TAG_ACTION_AI_CHASE_PLAYER);
+	this->stopActionByTag(TAG_ACTION_AI_CHASE_PLAYER);
+	this->runAction(aMove);
 }

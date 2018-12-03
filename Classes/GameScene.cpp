@@ -103,7 +103,16 @@ void GameScene::onControllerTouchMoving(cocos2d::Vec2 velocity)
 
 	auto knightWorldPos = knight->getParent()->convertToWorldSpace(knight->getPosition());
 	auto scenePos = this->convertToNodeSpace(knightWorldPos);
+	if (scenePos.x < 800)
+	{
+		scenePos.x = 800;
+	}
+	else
+	{
+		scenePos.x = this->convertToNodeSpace(knightWorldPos).x;
+	}
 	gamePlayLayer->setPosition(scenePos);
+	
 
 	/*controller->setPositioin(Vec2(_Knight->getPositionX()-200, _Knight->getPositionY()-600));*/
 

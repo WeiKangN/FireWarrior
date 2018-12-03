@@ -6,6 +6,7 @@
 #include"cocos2d.h"
 #include"GamePlayLayer.h"
 #include"Physics\PhysicsHandler.h"
+#include "MainPlayer.h"
 class EvilDog : public GameObject
 
 {
@@ -16,6 +17,11 @@ public:
 	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
 	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
+	
+	
+	void enalbeAI(MainPlayer *player);
+	void scheduleUpdateAI(float delta);
+
 	CREATE_FUNC(EvilDog);
 	virtual bool init();
 	void DogIdle();
@@ -28,6 +34,10 @@ public:
 private:
 	cocos2d::Sprite*_sprDoggie;
 	float Health;
+	float  _timeUpdateAI;
+	MainPlayer* _player;
+
+	void chasePlayer();
 
 };
 

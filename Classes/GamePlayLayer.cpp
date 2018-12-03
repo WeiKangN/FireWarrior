@@ -55,6 +55,7 @@ bool GamePlayLayer::init()
 	_HellDog->setPosition(1000.0f, 500.0f);
 	_HellDog->DogIdle();
 	_HellDog->setHealthBar(100.0f);
+	_HellDog->enalbeAI(_Knight);
 	
 	
 	//khoang cach giua chó vs Maverick
@@ -128,7 +129,7 @@ bool GamePlayLayer::init()
 
 void GamePlayLayer::update(float delta)
 {
-	if (_HellDog!= nullptr)
+	/*if (_HellDog!= nullptr)
 	{
 		auto distance = _HellDog->getPosition() - _Knight->getPosition();
 		Vec2 MinDis = Vec2(700.0f, 700.0f);
@@ -138,7 +139,7 @@ void GamePlayLayer::update(float delta)
 			_HellDog->chaseMaverick(_Knight->getPosition());
 		}
 	}
-	
+	*/
 	
 }
 
