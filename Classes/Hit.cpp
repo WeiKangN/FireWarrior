@@ -20,10 +20,11 @@ bool Hit::init()
 	{
 		return false;
 	}
-	PhysicsBody *phyBody = PhysicsBody::createBox(Size(30.0f, 50.0f), PhysicsMaterial(0.1f, 0.0f, 0.0f));
+	PhysicsBody *phyBody = PhysicsBody::createBox(Size(20.0f, 20.0f), PhysicsMaterial(0.1f, 0.0f, 0.0f));
 	phyBody->setGravityEnable(false);
 	phyBody->setRotationEnable(false);
 	phyBody->setDynamic(true);
+	phyBody->setPositionOffset(Vec2(3.0f ,-3.0f));
 	phyBody->setCategoryBitmask(LINE_CATEGORY_BITMASK); // 0001
 	phyBody->setCollisionBitmask(LINE_COLISION_AND_CONTACT_TEST_BITMASK); // 0010
 	phyBody->setContactTestBitmask(LINE_COLISION_AND_CONTACT_TEST_BITMASK);

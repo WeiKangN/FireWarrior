@@ -100,18 +100,6 @@ void GameScene::onControllerTouchMoving(cocos2d::Vec2 velocity)
 	//campos.x = knight->getPositionX();
 	//campos.y = knight->getPositionY();
 	//camera->setPosition3D(campos);
-
-	auto knightWorldPos = knight->getParent()->convertToWorldSpace(knight->getPosition());
-	auto scenePos = this->convertToNodeSpace(knightWorldPos);
-	if (scenePos.x < 800)
-	{
-		scenePos.x = 800;
-	}
-	else
-	{
-		scenePos.x = this->convertToNodeSpace(knightWorldPos).x;
-	}
-	gamePlayLayer->setPosition(scenePos);
 	
 
 	/*controller->setPositioin(Vec2(_Knight->getPositionX()-200, _Knight->getPositionY()-600));*/
@@ -132,7 +120,19 @@ void GameScene::update(float delta)
 	gamePlayLayer->setPosition(pos);
 	cocos2d::log("Pos = %f, %f", pos.x, pos.y);*/
 	auto knight = gamePlayLayer->_Knight;
-	gamePlayLayer->setPosition(Vec2(Director::getInstance()->getWinSize() * 0.5f) - knight->getPosition());
+	auto winSize = Director::getInstance()->getWinSize();
+	auto knightPos = knight->getPosition();
+	if (knightPos.x < winSize.width * 0.5f)
+	{
+		knightPos.x = winSize.width * 0.5f;
+	}
+	if (knightPos.y < winSize.height * 0.5f)
+	{
+		knightPos.y = winSize.height * 0.5f;
+	}
+	auto pos = Vec2(winSize * 0.5f) - knightPos;
+
+	gamePlayLayer->setPosition(pos);
 	//auto camera = Camera::getDefaultCamera();
 	//auto campos = camera->getPosition3D();
 	//campos.x += 10;

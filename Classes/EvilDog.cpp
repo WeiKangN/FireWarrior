@@ -28,7 +28,7 @@ EvilDog::~EvilDog()
 
 void EvilDog::onContactBeganWith(GameObject * obj)
 {
-	if (obj->getTag()==TAG_MAVERICK)
+	if (obj->getTag()==TAG_MAVERICK|| obj->getTag()==TAG_HIT)
 	{
 		
 		this->TakeDamage();
@@ -58,15 +58,21 @@ void EvilDog::scheduleUpdateAI(float delta)
 {
 	if (_player != nullptr)
 	{
-		auto distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
-		if (distanceX < _sprDoggie->getContentSize().width * 0.5f + 100.0f) // doan nay la : Khi con enemy chay den player cach mot khoang nao do la no se dung lai - dang xet theo chieu  x thui		
+		float distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
+		if (distanceX < 500)
 		{
-			
-		}
-		else // neu no khong thoa khoang cach thi no di theo player
-		{
-		
-			chasePlayer();
+			{
+
+				if (distanceX < _sprDoggie->getContentSize().width * 0.5f + 100.0f) // doan nay la : Khi con enemy chay den player cach mot khoang nao do la no se dung lai - dang xet theo chieu  x thui		
+				{
+
+				}
+				else // neu no khong thoa khoang cach thi no di theo player
+				{
+
+					chasePlayer();
+				}
+			}
 		}
 	}
 }
@@ -88,9 +94,10 @@ bool EvilDog::init()
 
 
 	// Physic
-	PhysicsBody *physBody = PhysicsBody::createBox(Size(28.0f, 13.0f), PhysicsMaterial(1.0f, 1.0f, 0.0f));;
+	PhysicsBody *physBody = PhysicsBody::createBox(Size(28.0f, 13.0f), PhysicsMaterial(1.0f, 0.0f, 0.0f));;
 	physBody->setGravityEnable(false);
-	physBody->setDynamic(false);
+	physBody->setRotationEnable(false);
+	physBody->setDynamic(true);
 	physBody->setPositionOffset(Vec2(-5.0f,-10.0f));
 	physBody->setCategoryBitmask(ENEMY_CATEGORY_BITMASK); // 0001
 	physBody->setCollisionBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
@@ -103,11 +110,11 @@ bool EvilDog::init()
 
 }
 
-void EvilDog::chaseMaverick(cocos2d::Vec2 location)
-{
-	auto chase = MoveTo::create(15.0f, location);
-	runAction(chase);
-}
+//void EvilDog::chaseMaverick(cocos2d::Vec2 location)
+//{
+//	auto chase = MoveTo::create(15.0f, location);
+//	runAction(chase);
+//}
 void EvilDog::DogIdle()
 {
 	Animation* animation = Animation::create();
@@ -138,7 +145,7 @@ void EvilDog::Run()
 		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
 
 	}
-	animation->setDelayPerUnit(1 / 12.0f);
+	animation->setDelayPerUnit(1 / 1.0f);
 
 	Animate* animate = Animate::create(animation);
 	_sprDoggie->runAction(RepeatForever::create(animate));
@@ -153,18 +160,18 @@ void EvilDog::TakeDamage()
 	/*this->Health -= this->_dmg;
 	this->updateHealthBar(this->Health);
 	if (this->Health <= 0)
-	{
-		
-		
-
-		
-	}*/
+	{}*/
 
 	this->getPhysicsBody()->setContactTestBitmask(false);
-	CallFunc *removeCallback = CallFunc::create([=] {
-		this->removeFromParent();
+	CallFunc*stopAllAction = CallFunc::create([=] {
+		this->stopAllActions();
 	});
-	runAction(Sequence::create(Blink::create(0.0f, 1), removeCallback, nullptr));
+	CallFunc *removeCallback = CallFunc::create([=] 
+	{
+		this->removeFromParent();
+	 
+	});
+	runAction(Sequence::create(stopAllAction, Blink::create(0.0f, 1), removeCallback, nullptr));
 }
 
 
@@ -201,4 +208,5 @@ void EvilDog::chasePlayer() // Ham nay la ham con enemy chay theo nhan vat
 	aMove->setTag(TAG_ACTION_AI_CHASE_PLAYER);
 	this->stopActionByTag(TAG_ACTION_AI_CHASE_PLAYER);
 	this->runAction(aMove);
+	Run();
 }

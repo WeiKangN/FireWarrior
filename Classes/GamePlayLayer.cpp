@@ -7,6 +7,7 @@
 #include "Const.h"
 #include "Physics/PhysicsHandler.h"
 #include "Wall.h"
+#include "AudioEngine.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -30,12 +31,16 @@ bool GamePlayLayer::init()
 	this->setColor(Color3B::RED);
 
 	right = true;
+	//Music 
+	experimental::AudioEngine::preload("Sound/0-DUNGEON_dungchonhom.mp3");
+	auto MusicBG = experimental::AudioEngine::play2d("Sound/0-DUNGEON_dungchonhom.mp3");
+	experimental::AudioEngine::setLoop(MusicBG, true);
 
 	//MainPlayer
 	winSize = Director::getInstance()->getWinSize();
 	_Knight = MainPlayer::create();
 	this->addChild(_Knight,2);
-	_Knight->setPosition(250.0f, 600.0f);
+	_Knight->setPosition(250.0f, 100.0f);
 	_Knight->PlayAnimation();
 	_Knight->setHealthBar(100.0f);
 	
@@ -78,8 +83,11 @@ bool GamePlayLayer::init()
 	//map
 
 	auto _tileMap = TMXTiledMap::create("Art/Underground/underground2.tmx");
+	/*_tileMap->setScale(6.5f);
+	_tileMap->setPosition(-20.0,-2400.0f);*/
+	_tileMap->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 	_tileMap->setScale(6.5f);
-	_tileMap->setPosition(-20.0f,-2400.0f);
+	_tileMap->setPosition(0.0f, 0.0f);
 	addChild(_tileMap, 0, 99);
 
 
