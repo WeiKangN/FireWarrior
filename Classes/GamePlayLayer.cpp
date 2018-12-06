@@ -40,7 +40,7 @@ bool GamePlayLayer::init()
 	winSize = Director::getInstance()->getWinSize();
 	_Knight = MainPlayer::create();
 	this->addChild(_Knight,2);
-	_Knight->setPosition(250.0f, 100.0f);
+	_Knight->setPosition(250.0f, 500.0f);
 	_Knight->PlayAnimation();
 	_Knight->setHealthBar(100.0f);
 	
@@ -50,7 +50,7 @@ bool GamePlayLayer::init()
 	this->addChild(_bandit,2);
 	_bandit->setPosition(1200.0f, 620.0f);
 	_bandit->Idle();
-	_bandit->Attack();
+	//_bandit->Attack();
 	_bandit->setHealthBar(100.0f);
 	_bandit->enalbeAI(_Knight);
 

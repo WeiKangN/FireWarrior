@@ -3,8 +3,8 @@
 #include"Const.h"
 #include "Physics\PhysicsHandler.h"
 
-#define DAMAGE_BANDIT  27.5F
-#define HEALTH_BANDIT 50.0F
+#define DAMAGE_BANDIT  5.5F
+#define HEALTH_BANDIT 20.0F
 // toc do theo chieu x , y ma con enemy chay theo nhan vat
 #define SPEED_X 150.0f
 #define SPEED_Y SPEED_X
@@ -38,9 +38,10 @@ bool Bandit::init()
 	this->setScaleX(-6.0f);
 
 	// Physic
-	PhysicsBody *physBody = PhysicsBody::createBox(Size(13.0f, 25.0f), PhysicsMaterial(1.0f, 1.0f, 0.0f));;
+	PhysicsBody *physBody = PhysicsBody::createBox(Size(13.0f, 25.0f), PhysicsMaterial(1.0f, 0.0f, 0.0f));;
 	physBody->setGravityEnable(false);
-	physBody->setDynamic(false);
+	physBody->setRotationEnable(false);
+	physBody->setDynamic(true);
 	physBody->setPositionOffset(Vec2(-10.0f, -10.0f));
 	physBody->setCategoryBitmask(ENEMY_CATEGORY_BITMASK); // 0001
 	physBody->setCollisionBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
@@ -61,7 +62,7 @@ void Bandit::Idle()
 		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
 
 	}
-	animation->setDelayPerUnit(1 / 12.0f);
+	animation->setDelayPerUnit(1 / 2.0f);
 
 	Animate* animate = Animate::create(animation);
 	_Enemy->runAction(RepeatForever::create(animate));
@@ -205,4 +206,6 @@ void Bandit::chasePlayer()
 	this->stopActionByTag(TAG_ACTION_AI_CHASE_PLAYER);
 	this->runAction(aMove);
 	Run();
+	Attack();
+
 }

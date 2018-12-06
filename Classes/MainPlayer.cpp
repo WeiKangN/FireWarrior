@@ -20,7 +20,7 @@ using namespace cocos2d::ui;
 #define ANIM_HIT_LEFT 7 
 #define ANIM_HIT_RIGHT 8
 
-#define DAMAGE_MAVERICK 25.0f
+#define DAMAGE_MAVERICK 10.0f
 #define HEALTH_MAVERICK 100.0F
 
 #define ADJUST_VALUE_VELOCITY_X 200.0f

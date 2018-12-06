@@ -3,8 +3,8 @@
 #include "Const.h"
 #include "ui\UILoadingBar.h"
 
-#define DAMAGE_EVILDOG  28.0F
-#define HEALTH_DOG 50.0F
+#define DAMAGE_EVILDOG  10.0F
+#define HEALTH_DOG 10.0F
 // toc do theo chieu x , y ma con enemy chay theo nhan vat
 #define SPEED_X 150.0f
 #define SPEED_Y SPEED_X
