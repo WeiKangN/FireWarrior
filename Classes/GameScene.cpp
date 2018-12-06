@@ -122,11 +122,11 @@ void GameScene::update(float delta)
 	auto knight = gamePlayLayer->_Knight;
 	auto winSize = Director::getInstance()->getWinSize();
 	auto knightPos = knight->getPosition();
-	if (knightPos.x < winSize.width * 0.5f)
+	if (knightPos.x < winSize.width * 0.5f) // left border
 	{
 		knightPos.x = winSize.width * 0.5f;
 	}
-	if (knightPos.y < winSize.height * 0.5f)
+	if (knightPos.y < winSize.height * 0.5f) // bottom
 	{
 		knightPos.y = winSize.height * 0.5f;
 	}

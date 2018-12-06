@@ -107,8 +107,8 @@
   <object id="24" type="1" x="16" y="607.333" width="783.333" height="34"/>
   <object id="25" type="1" x="783.333" y="80" width="15.3333" height="524.667"/>
   <object id="26" type="1" x="152" y="101.333" width="14.6667" height="76"/>
-  <object id="27" x="96.6667" y="391.333" width="15.3333" height="48.6667"/>
-  <object id="28" x="705.333" y="360.667" width="13.3333" height="32.6667"/>
+  <object id="27" type="1" x="96.6667" y="391.333" width="15.3333" height="48.6667"/>
+  <object id="28" type="1" x="705.333" y="360.667" width="13.3333" height="32.6667"/>
   <object id="29" type="2" x="48" y="527.333" width="32" height="42.6667"/>
   <object id="30" type="1" x="240" y="528" width="31.9583" height="42"/>
   <object id="31" x="608.667" y="528" width="32" height="42"/>

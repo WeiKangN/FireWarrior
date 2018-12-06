@@ -5,11 +5,18 @@
 
 #define DAMAGE_BANDIT  27.5F
 #define HEALTH_BANDIT 50.0F
+// toc do theo chieu x , y ma con enemy chay theo nhan vat
+#define SPEED_X 150.0f
+#define SPEED_Y SPEED_X
+// tag action ai
+#define TAG_ACTION_AI_CHASE_PLAYER 100
+
 USING_NS_CC;
 Bandit::Bandit():
 	Health(HEALTH_BANDIT)
 {
 	_dmg = DAMAGE_BANDIT;
+	_timeUpdateAI = 0.3f;
 }
 
 Bandit::~Bandit()
@@ -71,7 +78,7 @@ void Bandit::Attack()
 		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
 
 	}
-	animation->setDelayPerUnit(1 / 12.0f);
+	animation->setDelayPerUnit(1 / 2.0f);
 
 	Animate* animate = Animate::create(animation);
 	_Enemy->runAction(RepeatForever::create(animate));
@@ -86,7 +93,7 @@ void Bandit::Run()
 		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
 
 	}
-	animation->setDelayPerUnit(1 / 12.0f);
+	animation->setDelayPerUnit(1 / 2.0f);
 
 	Animate* animate = Animate::create(animation);
 	_Enemy->runAction(RepeatForever::create(animate));
@@ -100,10 +107,13 @@ void Bandit::TakeDamage()
 	{
 
 		this->getPhysicsBody()->setContactTestBitmask(false);
+		CallFunc*stopAllAction = CallFunc::create([=] {
+			this->stopAllActions();
+		});
 		CallFunc *removeCallback = CallFunc::create([=] {
 			this->removeFromParent();
 		});
-		runAction(Sequence::create(Blink::create(0.0f, 1), removeCallback, nullptr));
+		runAction(Sequence::create(stopAllAction,Blink::create(0.0f, 1), removeCallback, nullptr));
 	}
 	else
 	{
@@ -134,7 +144,7 @@ void Bandit::setHealthBar(float percent)
 
 void Bandit::onContactBeganWith(GameObject * obj)
 {
-	if (obj->getTag() == TAG_HIT)
+	if (obj->getTag() == TAG_HIT|| obj->getTag()==TAG_MAVERICK)
 	{
 		ObjDmg = obj->getDmg();
 		this->TakeDamage();
@@ -151,4 +161,48 @@ void Bandit::onContactSeparateWith(GameObject * obj, cocos2d::PhysicsContact & c
 
 void Bandit::onContactPreSolveWith(GameObject * obj, cocos2d::PhysicsContact & contact, cocos2d::PhysicsContactPreSolve & solve)
 {
+}
+
+
+void Bandit::enalbeAI(MainPlayer * player)
+{
+	_player = player;
+	this->schedule(CC_SCHEDULE_SELECTOR(Bandit::scheduleUpdateAI), _timeUpdateAI, CC_REPEAT_FOREVER, 0.0f);
+}
+
+void Bandit::scheduleUpdateAI(float delta)
+{
+	if (_player != nullptr)
+	{
+		float distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
+		if (distanceX < 500)
+		{
+			{
+
+				if (distanceX < _Enemy->getContentSize().width * 0.5f + 100.0f) 
+				{
+
+				}
+				else // neu no khong thoa khoang cach thi no di theo player
+				{
+
+					chasePlayer();
+				}
+			}
+		}
+	}
+}
+
+void Bandit::chasePlayer()
+{
+	auto targetPos = _player->getPosition();
+	auto distance = targetPos - this->getPosition();
+	auto timeX = std::abs(distance.x / SPEED_X);
+	auto timeY = std::abs(distance.y / SPEED_Y);
+	auto time = timeX > timeY ? timeX : timeY;
+	auto aMove = MoveBy::create(time, distance);
+	aMove->setTag(TAG_ACTION_AI_CHASE_PLAYER);
+	this->stopActionByTag(TAG_ACTION_AI_CHASE_PLAYER);
+	this->runAction(aMove);
+	Run();
 }

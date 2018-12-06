@@ -48,6 +48,7 @@ void EvilDog::onContactPreSolveWith(GameObject * obj, cocos2d::PhysicsContact & 
 {
 }
 
+
 void EvilDog::enalbeAI(MainPlayer * player)
 {
 	_player = player;

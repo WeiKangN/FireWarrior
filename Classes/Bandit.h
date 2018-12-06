@@ -4,6 +4,7 @@
 #include "GamePlayLayer.h"
 #include"GameObject.h"
 #include"Physics\PhysicsHandler.h"
+#include"MainPlayer.h"
 
 class Bandit:public GameObject
 
@@ -24,10 +25,19 @@ public:
 	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
 	virtual void onContactPreSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, cocos2d::PhysicsContactPreSolve& solve) override;
+
+
+	void enalbeAI(MainPlayer *player);
+	void scheduleUpdateAI(float delta);
+
 private:
 	cocos2d::Sprite*_Enemy;
 	float Health;
 	float ObjDmg;
+	float  _timeUpdateAI;
+	MainPlayer* _player;
+
+	void chasePlayer();
 };
 
 

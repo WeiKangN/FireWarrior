@@ -52,6 +52,7 @@ bool GamePlayLayer::init()
 	_bandit->Idle();
 	_bandit->Attack();
 	_bandit->setHealthBar(100.0f);
+	_bandit->enalbeAI(_Knight);
 
 	//Enemy02
 	//auto resetHealth = ;
@@ -108,7 +109,7 @@ bool GamePlayLayer::init()
 			auto wall = Wall::create();
 			_tileMap->addChild(wall);
 			wall->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-			wall->setPosition(x + width * 0.5f, y * height * 0.5f);
+			wall->setPosition(x + width * 0.5f, y + height * 0.5f);
 
 			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(100.0f, 0.0f, 0.0f));
 			tilePhysics->setDynamic(false);   //static is good enough for walls
@@ -140,7 +141,7 @@ bool GamePlayLayer::init()
 			auto wall = Wall::create();
 			_tileMap->addChild(wall);
 			wall->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-			wall->setPosition(x + width * 0.5f, y * height * 0.5f);
+			wall->setPosition(x + width * 0.5f, y + height * 0.5f);
 
 			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(100.0f, 0.0f, 0.0f));
 			tilePhysics->setDynamic(false);   //static is good enough for walls
