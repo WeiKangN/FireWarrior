@@ -107,13 +107,46 @@ bool GamePlayLayer::init()
 
 			auto wall = Wall::create();
 			_tileMap->addChild(wall);
-			wall->setPosition(x, y);
+			wall->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+			wall->setPosition(x + width * 0.5f, y * height * 0.5f);
 
 			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(100.0f, 0.0f, 0.0f));
 			tilePhysics->setDynamic(false);   //static is good enough for walls
 			tilePhysics->setGravityEnable(false);
 			tilePhysics->setRotationEnable(false);
-			tilePhysics->setPositionOffset(Vec2(1500.0f, 60.0f));
+			//tilePhysics->setPositionOffset(Vec2(1500.0f, 60.0f));
+			tilePhysics->setCategoryBitmask(WALL_CATEGORY_BITMASK);
+			tilePhysics->setCollisionBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
+			tilePhysics->setContactTestBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
+			wall->setPhysicsBody(tilePhysics);
+
+			//auto node = Node::create();
+			//this->addChild(node);
+			//node->setPosition(x, y);
+
+			//PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+			//tilePhysics->setDynamic(false);   //static is good enough for walls
+			//tilePhysics->setGravityEnable(false);
+			//tilePhysics->setRotationEnable(false);
+			//node->setPhysicsBody(tilePhysics);
+		}
+		else if (type == 2)
+		{
+			float x = objInfo.at("x").asFloat();
+			float y = objInfo.at("y").asFloat();
+			float width = objInfo.at("width").asFloat();
+			float height = objInfo.at("height").asFloat();
+
+			auto wall = Wall::create();
+			_tileMap->addChild(wall);
+			wall->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+			wall->setPosition(x + width * 0.5f, y * height * 0.5f);
+
+			PhysicsBody* tilePhysics = PhysicsBody::createBox(Size(width, height), PhysicsMaterial(100.0f, 0.0f, 0.0f));
+			tilePhysics->setDynamic(false);   //static is good enough for walls
+			tilePhysics->setGravityEnable(false);
+			tilePhysics->setRotationEnable(false);
+			//tilePhysics->setPositionOffset(Vec2(1500.0f, 60.0f));
 			tilePhysics->setCategoryBitmask(WALL_CATEGORY_BITMASK);
 			tilePhysics->setCollisionBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
 			tilePhysics->setContactTestBitmask(WALL_COLLISION_AND_CONTACT_TEST_BIT_MASK);
