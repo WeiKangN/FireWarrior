@@ -11,7 +11,7 @@ Scene* MainMenuScene::createScene()
 	auto scene = Scene::create();
 	auto layer = MainMenuScene::create();
 	scene->addChild(layer);
-	return MainMenuScene::create();
+	return scene;
 }
 
 static void problemLoading(const char* filename)
@@ -47,17 +47,12 @@ bool MainMenuScene::init()
 	
 
 	// add BackGround
-	auto sprite = Sprite::create("art/menu.jpg");
+	auto sprite = Sprite::create("Art/menu.jpg"); // file nay la file nao
 	this->addChild(sprite);
 	sprite->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
 	if (sprite == nullptr)
 	{
-		problemLoading("'art/menued.jpg'");
-
-
-	}
-
-	{
+		//problemLoading("Art/menued.jpg"); // file nay la file nao
 
 
 	}
@@ -69,8 +64,8 @@ bool MainMenuScene::init()
 
 
 	auto playImage = MenuItemImage::create(
-		"art/sta.png",
-		"art/sta1.png",
+		"Art/sta.png",
+		"Art/sta1.png",
 		CC_CALLBACK_1(MainMenuScene::GoToGameScene, this));
 	playImage->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	playImage->setPosition(Vec2(visibleSize.width * 0.5f,visibleSize.height*0.4f));
@@ -80,8 +75,8 @@ bool MainMenuScene::init()
 
 	//btn2
 	auto optionsImage = MenuItemImage::create(
-		"art/sti.png",
-		"art/sti1.png",
+		"Art/sti.png",
+		"Art/sti1.png",
 		CC_CALLBACK_1(MainMenuScene::GoTosting1, this));
 	optionsImage->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	optionsImage->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 0.3f));
@@ -93,7 +88,7 @@ bool MainMenuScene::init()
 	menu2->setPosition(Vec2::ZERO);
 	this->addChild(menu2, 2);
 
-	auto _quitBtn = cocos2d::ui::Button::create("art/QuitButton3.png");
+	auto _quitBtn = cocos2d::ui::Button::create("Art/QuitButton3.png");
 	_quitBtn->setScale(1.0f);
 	_quitBtn->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	_quitBtn->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 0.1f));
@@ -106,7 +101,7 @@ bool MainMenuScene::init()
 	this->addChild(_labelQuit, 3);
 
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-	audio->playBackgroundMusic("sound/Menu_Soundtrack.mp3", false);
+	audio->playBackgroundMusic("Sound/Menu_Soundtrack.mp3", false);
 
 	
 
@@ -159,7 +154,7 @@ void MainMenuScene::GoToGameScene(cocos2d::Ref * pSender)
 	auto game = GameScene::createGameScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1, game));
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-	audio->playEffect("art/select.mp3", false, 1.0f, 1.0f, 1.0f);
+	audio->playEffect("Art/select.mp3", false, 1.0f, 1.0f, 1.0f);
 
 }
 
@@ -168,7 +163,7 @@ void MainMenuScene::GoTosting1(cocos2d::Ref * pSender)
 	auto gamesting1 = sting1::createScene();
 	Director::getInstance()->replaceScene(gamesting1);
 	auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
-	audio->playEffect("art/select.mp3", false, 1.0f, 1.0f, 1.0f);
+	audio->playEffect("Art/select.mp3", false, 1.0f, 1.0f, 1.0f);
 }
 
 //void MainMenuScene::TouchQuitButton(Ref * pSender, ui::Widget::TouchEventType eEventType)

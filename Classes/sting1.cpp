@@ -27,7 +27,7 @@ bool sting1::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto sting = Sprite::create("art/menu.jpg");
+	auto sting = Sprite::create("Art/menu.jpg");
 	this->addChild(sting);
 	sting->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	sting->setPosition(this->getContentSize() * 0.5f);
@@ -37,11 +37,11 @@ bool sting1::init()
 	sting->setScaleY(scaleY);
 	if (checksound == true)
 	{
-		soundbutton = cocos2d::ui::Button::create("art/Sound_On.png", "art/Sound_On_Click.png");
+		soundbutton = cocos2d::ui::Button::create("Art/Sound_On.png", "Art/Sound_On_Click.png");
 	}
 	else
 	{
-		soundbutton = cocos2d::ui::Button::create("art/Sound_Off.png", "art/Sound_Off_Click.png");
+		soundbutton = cocos2d::ui::Button::create("Art/Sound_Off.png", "Art/Sound_Off_Click.png");
 	}
 	
 	soundbutton->setPosition(Vec2(visibleSize.width*0.5f, visibleSize.width*0.4f));
@@ -56,7 +56,7 @@ bool sting1::init()
 
 
 
-	auto playbutton = MenuItemImage::create("art/back.png", "art/back_click.png", CC_CALLBACK_1(sting1::CombackMainMenuScene, this));
+	auto playbutton = MenuItemImage::create("Art/back.png", "Art/back_click.png", CC_CALLBACK_1(sting1::CombackMainMenuScene, this));
 	playbutton->setPosition(Vec2(visibleSize.width*0.1, visibleSize.height*0.9));
 	auto menu = Menu::create(playbutton, NULL);
 	menu->setPosition(Vec2::ZERO);
@@ -75,13 +75,13 @@ void sting1::onTouchBegan(Ref * senser, cocos2d::ui::Widget::TouchEventType type
 		{
 			audio->pauseBackgroundMusic();
 			checksound = false;
-			soundbutton->loadTextures("art/Sound_Off.png", "art/Sound_Off_Click.png");
+			soundbutton->loadTextures("Art/Sound_Off.png", "Art/Sound_Off_Click.png");
 		}
 		else
 		{
 			audio->resumeBackgroundMusic();
 			checksound = true;
-			soundbutton->loadTextures("art/Sound_On.png", "art/Sound_On_Click.png");
+			soundbutton->loadTextures("Art/Sound_On.png", "Art/Sound_On_Click.png");
 		}
 	case cocos2d::ui::Widget::TouchEventType::CANCELED:
 

@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include"GamePlayLayer.h"
+#include "SimpleAudioEngine.h"
 #include "RoleController.h"
 #include "MainPlayer.h"
 #include "PoolHit.h"

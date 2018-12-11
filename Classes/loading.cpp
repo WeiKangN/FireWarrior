@@ -42,7 +42,7 @@ bool loading::init()
 void loading::goToMainMenuScene()
 {
 	auto scene = MainMenuScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(1, scene));
+	Director::getInstance()->replaceScene(scene);
 }
 void loading::createloading()
 {
@@ -57,13 +57,13 @@ void loading::createloading()
 	backgound->setScaleX(scaleX);
 	backgound->setScaleY(scaleY);*/
 	//cái vỏ 
-	auto Loading = Sprite::create("art/loadingbar_border.png");
+	auto Loading = Sprite::create("Art/loadingbar_border.png");
 	this->addChild(Loading);
 	Loading->setPosition(Vec2(winSize.width * 0.5f, winSize.height * 0.5f));
 	Loading->setScaleX(1.5);
 	/*Loading->setScaleY(0.5);*/
 	//cái ruột
-	auto loadingBar = ui::LoadingBar::create("art/loadingbar_inside.png");
+	auto loadingBar = ui::LoadingBar::create("Art/loadingbar_inside.png");
 	loadingBar->setPosition(Vec2(winSize.width * 0.5f, winSize.height * 0.5f));
 	loadingBar->setScaleX(1.5);
 	loadingBar->setDirection(ui::LoadingBar::Direction::LEFT);

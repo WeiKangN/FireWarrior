@@ -3,6 +3,7 @@
 #include"Const.h"
 #include "Hit.h"
 #include"PoolHit.h"
+#include"GameOverScene.h"
 
 
 
@@ -504,6 +505,7 @@ void MainPlayer::onContactBeganWith(GameObject* obj)
 	{
 		_objDmg = obj->getDmg();
 		this->TakeDamage();
+		
 	}
 	
 }
@@ -559,7 +561,9 @@ void MainPlayer::TakeDamage()
 		CallFunc *removeCallback = CallFunc::create([=] {
 			this->removeFromParent();
 		});
-		runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));
+		/*runAction(Sequence::create(Blink::create(3.0f, 3), removeCallback, nullptr));*/
+		auto gameOver = GameOverScene::createScene();
+		Director::getInstance()->replaceScene(gameOver);
 	}
 	this->updateHealthBar(this->Health);
 
