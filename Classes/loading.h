@@ -8,7 +8,7 @@ public:
 	loading();
 	~loading();
 	void	createloading();
-	static cocos2d::Scene* createscene();
+	static cocos2d::Scene* createScene();
 	virtual bool init();
 	void goToMainMenuScene();
 	CREATE_FUNC(loading);
