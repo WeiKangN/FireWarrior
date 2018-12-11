@@ -19,7 +19,7 @@
 
 
 
-
+#define TAG_EHIT 7
 #define TAG_DOG 3
 #define TAG_BANDIT 4
 #define TAG_BOSS 5

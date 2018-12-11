@@ -1,6 +1,8 @@
 #include "Bandit.h"
 #include "GamePlayLayer.h"
 #include"Const.h"
+#include"EnemyHit.h"
+#include"PoolEnemyHit.h"
 #include "Physics\PhysicsHandler.h"
 
 #define DAMAGE_BANDIT  5.5F
@@ -10,17 +12,20 @@
 #define SPEED_Y SPEED_X
 // tag action ai
 #define TAG_ACTION_AI_CHASE_PLAYER 100
+#define OFFSET_ATTACK 75.0f
 
 USING_NS_CC;
 Bandit::Bandit():
-	Health(HEALTH_BANDIT)
+	Health(HEALTH_BANDIT),_poolEnemyHit(nullptr)
 {
+	_poolEnemyHit = new PoolEnemyHit();
 	_dmg = DAMAGE_BANDIT;
 	_timeUpdateAI = 0.3f;
 }
 
 Bandit::~Bandit()
 {
+	CC_SAFE_DELETE(_poolEnemyHit);
 }
 
 bool Bandit::init()
@@ -83,6 +88,22 @@ void Bandit::Attack()
 
 	Animate* animate = Animate::create(animation);
 	_Enemy->runAction(RepeatForever::create(animate));
+}
+
+void Bandit::AttackRight()
+{
+	Animation* animation = Animation::create();
+	for (int i = 1; i < 8; i++)
+	{
+		std::string Demons = StringUtils::format("attack (%d).png", i);
+		animation->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(Demons));
+
+	}
+	animation->setDelayPerUnit(1 / 2.0f);
+
+	Animate* animate = Animate::create(animation);
+	_Enemy->runAction(RepeatForever::create(animate));
+	//_Enemy->setScaleX(-6.0f);
 }
 
 void Bandit::Run()
@@ -164,6 +185,38 @@ void Bandit::onContactPreSolveWith(GameObject * obj, cocos2d::PhysicsContact & c
 {
 }
 
+void Bandit::Fight()
+{
+	auto ehit = _poolEnemyHit->createEnemyHit();
+	auto gameLayer = this->getParent();
+	/*auto posX = this->_physicsBody->getPosition().x + 20.0f;
+	auto posY = this->_physicsBody->getPosition().y;*/
+	auto posX = this->getPosition().x;
+	auto posY = this->getPosition().y;
+	if (_direction == RIGHT)
+	{
+		Attack();
+		posX += OFFSET_ATTACK;
+	}
+	else if (_direction == LEFT)
+	{
+		AttackRight();
+		posX += -OFFSET_ATTACK;
+	}
+	/*else if (_direction == UP)
+	{
+		PlayAnimationHitUp();
+		posY += OFFSET_ATTACK;
+	}
+	else if (_direction == DOWN)
+	{
+		PlayAnimationHit();
+		posY += -OFFSET_ATTACK;
+	}*/
+	ehit->attackAt(Vec2(posX-300, posY));
+	gameLayer->addChild(ehit);
+}
+
 
 void Bandit::enalbeAI(MainPlayer * player)
 {
@@ -186,7 +239,7 @@ void Bandit::scheduleUpdateAI(float delta)
 				}
 				else // neu no khong thoa khoang cach thi no di theo player
 				{
-
+					Fight();
 					chasePlayer();
 				}
 			}

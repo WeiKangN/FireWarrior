@@ -500,7 +500,7 @@ void MainPlayer::Attack()
 
 void MainPlayer::onContactBeganWith(GameObject* obj)
 {
-	if (obj->getTag()==TAG_DOG||obj->getTag()==TAG_BANDIT)
+	if (obj->getTag()==TAG_DOG||obj->getTag()==TAG_BANDIT|| obj->getTag() == TAG_EHIT)
 	{
 		_objDmg = obj->getDmg();
 		this->TakeDamage();

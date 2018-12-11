@@ -39,7 +39,7 @@ public:
 	void Stop();
 	void updateHealthBar(float percent);
 	void setHealthBar(float percent);
-	void TakeDamage();
+	void TakeDamage() ;
 	virtual void onContactBeganWith(GameObject* obj) override;
 	virtual void onContactPostSolveWith(GameObject* obj, cocos2d::PhysicsContact& contact, const cocos2d::PhysicsContactPostSolve& solve) override;
 	virtual void onContactSeparateWith(GameObject* obj, cocos2d::PhysicsContact& contact) override;
