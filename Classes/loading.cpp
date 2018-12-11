@@ -41,7 +41,7 @@ bool loading::init()
 }
 void loading::goToMainMenuScene()
 {
-	auto scene = MainMenuScene::createscene();
+	auto scene = MainMenuScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(1, scene));
 }
 void loading::createloading()
