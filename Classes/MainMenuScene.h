@@ -9,13 +9,20 @@ class MainMenuScene : public cocos2d::Scene
 {
 public:
 
-	static cocos2d::Scene* createMainMenuScene();
-	void menuCloseCallback(cocos2d::Ref* pSender);
+	static cocos2d::Scene* createScene();
+	/*void menuCloseCallback(cocos2d::Ref* pSender);*/
 	void GoToGameScene(cocos2d::Ref* pSender);
-	void GoToGameOptions(cocos2d::Ref* pSender);
+	void GoTosting1(cocos2d::Ref* pSender);
 	void TouchQuitButton(Ref* pSender, ui::Widget::TouchEventType eEventType);
-	CREATE_FUNC(MainMenuScene);
+	
 	virtual bool init();
+
+
+	cocos2d::Animation *createAnimation(std::string prefixName, int pFramesOrder, float delay);
+		 
+	cocos2d:: Animation *animation;
+
+	CREATE_FUNC(MainMenuScene);
 private:
 
 };
