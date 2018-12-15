@@ -40,7 +40,7 @@ bool GamePlayLayer::init()
 	winSize = Director::getInstance()->getWinSize();
 	_Knight = MainPlayer::create();
 	this->addChild(_Knight,2);
-	_Knight->setPosition(250.0f, 500.0f);
+	_Knight->setPosition(180.0f, 3000.0f);
 	_Knight->PlayAnimation();
 	_Knight->setHealthBar(100.0f);
 	
@@ -87,7 +87,7 @@ bool GamePlayLayer::init()
 	/*_tileMap->setScale(6.5f);
 	_tileMap->setPosition(-20.0,-2400.0f);*/
 	_tileMap->setAnchorPoint(Vec2::ANCHOR_BOTTOM_LEFT);
-	_tileMap->setScale(6.5f);
+	_tileMap->setScale(6.5f);// phai nho scale map la gia tri bao nhieu
 	_tileMap->setPosition(0.0f, 0.0f);
 	addChild(_tileMap, 0, 99);
 
@@ -163,6 +163,38 @@ bool GamePlayLayer::init()
 			//tilePhysics->setRotationEnable(false);
 			//node->setPhysicsBody(tilePhysics);
 		}
+		else if (type == 10)
+		{
+			int x = objInfo.at("x").asInt();
+			int y = objInfo.at("y").asInt();
+			int width = objInfo.at("width").asInt();
+			int height = objInfo.at("height").asInt();
+			// gio lay scale map cua map gan vo
+			auto enemy = Bandit::create();
+			
+			this->addChild(enemy, 2);
+			enemy->setPosition(6.5f*(x + width * 0.5f), 6.5f*(y+height * 0.5f));
+			enemy->Idle();
+			//_bandit->Attack();
+			enemy->setHealthBar(100.0f);
+			enemy->enalbeAI(_Knight);
+		}
+		else if (type == 5)
+		{
+			int x = objInfo.at("x").asInt();
+			int y = objInfo.at("y").asInt();
+			int width = objInfo.at("width").asInt();
+			int height = objInfo.at("height").asInt();
+			// gio lay scale map cua map gan vo
+			auto enemy = EvilDog::create();
+			
+			this->addChild(enemy, 2);
+			enemy->setPosition(6.5f*(x + width * 0.5f), 6.5f*(y + height * 0.5f));
+			enemy->DogIdle();
+			//_bandit->Attack();
+			enemy->setHealthBar(100.0f);
+			enemy->enalbeAI(_Knight);
+		}
 		
 	}
 
@@ -207,4 +239,71 @@ void GamePlayLayer::onKeyReleased(cocos2d::EventKeyboard::KeyCode keycode, cocos
 	{
 		_Knight->Attack();
 	}
+}
+
+void GamePlayLayer::EvilDog02()
+{
+	_EvilDog2 = EvilDog::create();
+	this->addChild(_EvilDog2);
+	_EvilDog2->setPosition(1400.0f, 500.0f);
+}
+
+void GamePlayLayer::EvilDog03()
+{
+}
+
+void GamePlayLayer::EvilDog04()
+{
+}
+
+void GamePlayLayer::EvilDog05()
+{
+}
+
+void GamePlayLayer::EvilDog06()
+{
+}
+
+void GamePlayLayer::EvilDog07()
+{
+}
+
+void GamePlayLayer::Bandit02()
+{
+}
+
+void GamePlayLayer::Bandit03()
+{
+}
+
+void GamePlayLayer::Bandit04()
+{
+}
+
+void GamePlayLayer::Bandit05()
+{
+}
+
+void GamePlayLayer::Bandit06()
+{
+}
+
+void GamePlayLayer::Bandit07()
+{
+}
+
+void GamePlayLayer::Bandit08()
+{
+}
+
+void GamePlayLayer::Bandit09()
+{
+}
+
+void GamePlayLayer::Bandit010()
+{
+}
+
+void GamePlayLayer::Bandit011()
+{
 }

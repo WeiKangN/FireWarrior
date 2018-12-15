@@ -59,8 +59,16 @@ void EvilDog::scheduleUpdateAI(float delta)
 {
 	if (_player != nullptr)
 	{
+		if (this->getPositionX() > _player->getPositionX())
+		{
+			this->setScaleX(4.0f);
+		}
+		else
+		{
+			this->setScaleX(-4.0f);
+		}
 		float distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
-		if (distanceX < 500)
+		if (distanceX < 150)
 		{
 			{
 
@@ -103,7 +111,6 @@ bool EvilDog::init()
 	physBody->setCategoryBitmask(ENEMY_CATEGORY_BITMASK); // 0001
 	physBody->setCollisionBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK); // 0010
 	physBody->setContactTestBitmask(ENEMY_COLLISION_AND_CONTACT_TEST_BITMASK);
-	
 	//apply physicsBody to the sprite
 	this->addComponent(physBody);
 

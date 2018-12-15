@@ -40,7 +40,7 @@ bool Bandit::init()
 	this->setTag(TAG_BANDIT);
 	_Enemy->setPosition(this->getContentSize() * 0.5f);
 	this->setScale (6.0f);
-	this->setScaleX(-6.0f);
+	//this->setScaleX(-6.0f);
 
 	// Physic
 	PhysicsBody *physBody = PhysicsBody::createBox(Size(13.0f, 25.0f), PhysicsMaterial(1.0f, 0.0f, 0.0f));;
@@ -228,8 +228,16 @@ void Bandit::scheduleUpdateAI(float delta)
 {
 	if (_player != nullptr)
 	{
+		if (this->getPositionX() > _player->getPositionX())
+		{
+			this->setScaleX(-6.0f);
+		}
+		else
+		{
+			this->setScaleX(6.0f);
+		}
 		float distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
-		if (distanceX < 500)
+		if (distanceX < 150)
 		{
 			{
 

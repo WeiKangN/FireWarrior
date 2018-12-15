@@ -23,7 +23,7 @@ cocos2d::Scene * GameScene::createGameScene()
 	PhysicsWorld* world = scene->getPhysicsWorld();
 	world->setSubsteps(10);
 	// remember to turn off debug when release
-	world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//world->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	GameScene* node = GameScene::create();
 	scene->addChild(node);
 	return scene;
