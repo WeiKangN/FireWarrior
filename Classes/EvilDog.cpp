@@ -68,7 +68,7 @@ void EvilDog::scheduleUpdateAI(float delta)
 			this->setScaleX(-4.0f);
 		}
 		float distanceX = std::abs(this->getPosition().x - _player->getPosition().x);
-		if (distanceX < 150)
+		if (distanceX < 300)
 		{
 			{
 

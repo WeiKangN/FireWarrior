@@ -112,12 +112,10 @@
   <object id="29" type="2" x="48" y="527.333" width="32" height="42.6667"/>
   <object id="30" type="1" x="240" y="528" width="31.9583" height="42"/>
   <object id="31" x="608.667" y="528" width="32" height="42"/>
-  <object id="35" type="10" x="213.5" y="160" width="26" height="22"/>
-  <object id="36" type="10" x="397.5" y="126" width="22" height="25.5"/>
-  <object id="38" type="5" x="136.5" y="191.5" width="24" height="22.5"/>
+  <object id="35" type="10" x="205.5" y="170.5" width="26" height="21"/>
+  <object id="36" type="10" x="397.5" y="181" width="22" height="15.5"/>
+  <object id="38" type="5" x="137.5" y="199.5" width="23" height="14.5"/>
   <object id="39" type="5" x="474.5" y="171" width="24.5" height="25"/>
-  <object id="40" type="5" x="558.5" y="54" width="20.5" height="13.5"/>
-  <object id="41" type="5" x="476" y="52.5" width="24.5" height="21.5"/>
   <object id="42" type="5" x="648" y="156.5" width="22" height="17"/>
   <object id="44" type="10" x="141.5" y="282" width="21.5" height="19.5"/>
   <object id="45" type="10" x="197" y="329" width="16.5" height="12.5"/>
